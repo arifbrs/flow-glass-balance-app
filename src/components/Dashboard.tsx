@@ -91,19 +91,7 @@ const Dashboard = ({ transactions, monthlyBudget, onDeleteTransaction }: Dashboa
               <p className={`text-4xl font-bold ${balance >= 0 ? 'text-green-600 dark:text-green-400' : 'text-red-600 dark:text-red-400'}`}>
                 Rp{formatCurrency(Math.abs(balance))}
               </p>
-              <div className="flex items-center justify-center space-x-2">
-                {balance >= 0 ? (
-                  <div className="flex items-center space-x-1 text-green-600 dark:text-green-400">
-                    <TrendingUp className="w-4 h-4" />
-                    <span className="text-sm font-medium">Surplus</span>
-                  </div>
-                ) : (
-                  <div className="flex items-center space-x-1 text-red-600 dark:text-red-400">
-                    <TrendingDown className="w-4 h-4" />
-                    <span className="text-sm font-medium">Deficit</span>
-                  </div>
-                )}
-              </div>
+              {/* REMOVED: Surplus/Deficit indicator div */}
             </div>
           </div>
         </div>
