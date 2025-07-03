@@ -68,19 +68,7 @@ const Dashboard = ({ transactions, monthlyBudget, onDeleteTransaction }: Dashboa
     <div className="min-h-screen bg-gray-50 dark:bg-slate-900">
       {/* Header - Fixed spacing and typography */}
       <div className="sticky top-0 bg-white/95 dark:bg-slate-900/95 backdrop-blur-lg border-b border-gray-200 dark:border-gray-700 z-10">
-        <div className="max-w-md mx-auto px-6 py-4">
-          <div className="flex items-center justify-between">
-            <div>
-              <h1 className="text-xl font-bold text-gray-900 dark:text-white">Finance</h1>
-              <p className="text-sm text-gray-600 dark:text-gray-400 mt-1">
-                {new Date().toLocaleDateString('id-ID', { month: 'long', year: 'numeric' })}
-              </p>
-            </div>
-            <Button variant="ghost" size="icon" className="rounded-full text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white">
-              <MoreHorizontal className="w-5 h-5" />
-            </Button>
-          </div>
-        </div>
+        {/* REMOVED: Header container div */}
       </div>
 
       <div className="max-w-md mx-auto px-6 pb-32 space-y-6">
