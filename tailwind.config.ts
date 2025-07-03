@@ -26,8 +26,7 @@ export default {
 				foreground: 'hsl(var(--foreground))',
 				primary: {
 					DEFAULT: 'hsl(var(--primary))',
-					foreground: 'hsl(var(--primary-foreground))',
-					glow: 'hsl(var(--primary-glow))'
+					foreground: 'hsl(var(--primary-foreground))'
 				},
 				secondary: {
 					DEFAULT: 'hsl(var(--secondary))',
@@ -43,8 +42,7 @@ export default {
 				},
 				accent: {
 					DEFAULT: 'hsl(var(--accent))',
-					foreground: 'hsl(var(--accent-foreground))',
-					glow: 'hsl(var(--accent-glow))'
+					foreground: 'hsl(var(--accent-foreground))'
 				},
 				popover: {
 					DEFAULT: 'hsl(var(--popover))',
@@ -54,22 +52,9 @@ export default {
 					DEFAULT: 'hsl(var(--card))',
 					foreground: 'hsl(var(--card-foreground))'
 				},
-				glass: {
-					DEFAULT: 'hsl(var(--glass))',
-					border: 'hsl(var(--glass-border))'
-				},
-				income: {
-					DEFAULT: 'hsl(var(--income))',
-					light: 'hsl(var(--income-light))'
-				},
-				expense: {
-					DEFAULT: 'hsl(var(--expense))',
-					light: 'hsl(var(--expense-light))'
-				},
-				savings: {
-					DEFAULT: 'hsl(var(--savings))',
-					light: 'hsl(var(--savings-light))'
-				},
+				income: 'hsl(var(--income))',
+				expense: 'hsl(var(--expense))',
+				savings: 'hsl(var(--savings))',
 				sidebar: {
 					DEFAULT: 'hsl(var(--sidebar-background))',
 					foreground: 'hsl(var(--sidebar-foreground))',
@@ -85,6 +70,9 @@ export default {
 				lg: 'var(--radius)',
 				md: 'calc(var(--radius) - 2px)',
 				sm: 'calc(var(--radius) - 4px)'
+			},
+			fontFamily: {
+				sans: ['-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'Helvetica', 'Arial', 'sans-serif']
 			},
 			keyframes: {
 				'accordion-down': {

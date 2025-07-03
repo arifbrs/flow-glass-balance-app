@@ -20,50 +20,53 @@ const FloatingNavbar = ({ activeTab, onTabChange }: FloatingNavbarProps) => {
     setIsAddMenuOpen(!isAddMenuOpen);
   };
 
-  // Only show navbar on main pages, not on form pages
+  // Only show navbar on main pages
   const showNavbar = !['add-income', 'add-expense'].includes(activeTab);
 
   if (!showNavbar) return null;
 
   return (
     <>
-      {/* Add Menu Overlay with bottom-to-top animation */}
+      {/* Add Menu Overlay */}
       {isAddMenuOpen && (
-        <div className="fixed inset-0 bg-black/50 backdrop-blur-sm z-40" onClick={() => setIsAddMenuOpen(false)}>
-          <div className="fixed bottom-28 left-1/2 transform -translate-x-1/2 animate-slide-up-from-bottom">
-            <div className="glass-floating rounded-3xl p-3 space-y-2 min-w-[220px]">
+        <div 
+          className="fixed inset-0 bg-black/20 backdrop-blur-sm z-40" 
+          onClick={() => setIsAddMenuOpen(false)}
+        >
+          <div className="fixed bottom-20 left-1/2 transform -translate-x-1/2 slide-up">
+            <div className="bg-card border border-border rounded-2xl p-3 space-y-2 min-w-[200px] threads-shadow">
               <button
                 onClick={() => {
                   onTabChange('add-income');
                   setIsAddMenuOpen(false);
                 }}
-                className="flex items-center space-x-4 w-full p-4 rounded-2xl income-gradient text-white font-medium hover:scale-105 transition-transform duration-200 shadow-lg"
+                className="flex items-center space-x-3 w-full p-3 rounded-xl bg-green-50 dark:bg-green-950 text-green-600 hover:bg-green-100 dark:hover:bg-green-900 transition-colors"
               >
-                <div className="w-10 h-10 rounded-full bg-white/20 flex items-center justify-center">
-                  <Plus className="w-5 h-5" />
+                <div className="w-8 h-8 rounded-full bg-green-100 dark:bg-green-900 flex items-center justify-center">
+                  <Plus className="w-4 h-4" />
                 </div>
-                <span className="text-base">Tambah Pemasukan</span>
+                <span className="font-medium">Add Income</span>
               </button>
               <button
                 onClick={() => {
                   onTabChange('add-expense');
                   setIsAddMenuOpen(false);
                 }}
-                className="flex items-center space-x-4 w-full p-4 rounded-2xl expense-gradient text-white font-medium hover:scale-105 transition-transform duration-200 shadow-lg"
+                className="flex items-center space-x-3 w-full p-3 rounded-xl bg-red-50 dark:bg-red-950 text-red-600 hover:bg-red-100 dark:hover:bg-red-900 transition-colors"
               >
-                <div className="w-10 h-10 rounded-full bg-white/20 flex items-center justify-center">
-                  <Plus className="w-5 h-5" />
+                <div className="w-8 h-8 rounded-full bg-red-100 dark:bg-red-900 flex items-center justify-center">
+                  <Plus className="w-4 h-4" />
                 </div>
-                <span className="text-base">Tambah Pengeluaran</span>
+                <span className="font-medium">Add Expense</span>
               </button>
             </div>
           </div>
         </div>
       )}
 
-      {/* Modern Bottom Navigation Bar */}
-      <div className="fixed bottom-0 left-0 right-0 z-50 bg-background/95 backdrop-blur-lg border-t border-glass-border">
-        <div className="max-w-md mx-auto px-4 py-3">
+      {/* Bottom Navigation - Threads Style */}
+      <div className="fixed bottom-0 left-0 right-0 z-50 bg-background/95 backdrop-blur-lg border-t border-border">
+        <div className="max-w-md mx-auto px-4 py-2">
           <div className="flex items-center justify-between">
             {navItems.map((item, index) => {
               const Icon = item.icon;
@@ -73,14 +76,14 @@ const FloatingNavbar = ({ activeTab, onTabChange }: FloatingNavbarProps) => {
                 <div key={item.id} className="flex items-center">
                   <button
                     onClick={() => onTabChange(item.id)}
-                    className={`relative p-3 rounded-2xl transition-all duration-300 flex flex-col items-center space-y-1 min-w-[60px] ${
+                    className={`relative p-3 rounded-xl transition-all duration-200 flex flex-col items-center space-y-1 min-w-[50px] ${
                       isActive 
-                        ? 'bg-primary/10 text-primary' 
-                        : 'text-muted-foreground hover:text-foreground hover:bg-secondary/30'
+                        ? 'text-primary' 
+                        : 'text-muted-foreground hover:text-foreground'
                     }`}
                   >
                     <Icon className={`w-5 h-5 ${isActive ? 'scale-110' : ''} transition-transform duration-200`} />
-                    <span className={`text-xs font-medium ${isActive ? 'text-primary' : 'text-muted-foreground'}`}>
+                    <span className="text-xs font-medium">
                       {item.label}
                     </span>
                     {isActive && (
@@ -88,15 +91,14 @@ const FloatingNavbar = ({ activeTab, onTabChange }: FloatingNavbarProps) => {
                     )}
                   </button>
                   
-                  {/* Enhanced Add button in the middle */}
+                  {/* Add button */}
                   {index === 1 && (
-                    <div className="mx-4">
+                    <div className="mx-3">
                       <button
                         onClick={handleAddClick}
-                        className="p-4 rounded-full bg-gradient-to-r from-primary to-accent text-white shadow-2xl transform hover:scale-110 transition-all duration-300 relative"
+                        className="p-3 rounded-full bg-primary text-primary-foreground shadow-lg hover:bg-primary/90 transition-all duration-200 hover:scale-105"
                       >
-                        <Plus className={`w-6 h-6 transition-transform duration-300 ${isAddMenuOpen ? 'rotate-45' : ''}`} />
-                        <div className="absolute inset-0 rounded-full bg-gradient-to-r from-primary to-accent opacity-30 animate-pulse"></div>
+                        <Plus className={`w-5 h-5 transition-transform duration-200 ${isAddMenuOpen ? 'rotate-45' : ''}`} />
                       </button>
                     </div>
                   )}

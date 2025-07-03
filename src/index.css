@@ -2,208 +2,182 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Modern Finance PWA Design System - Gradients & Glass Effects */
+/* Threads.com Inspired Design System */
 
 @layer base {
   :root {
-    /* Modern gradient backgrounds */
-    --background: 240 15% 8%;
-    --foreground: 0 0% 98%;
+    /* Threads-inspired color palette */
+    --background: 255 255 255;
+    --foreground: 0 0% 5%;
 
-    /* Glass morphism cards */
-    --card: 240 15% 12%;
-    --card-foreground: 0 0% 95%;
-    --glass: 240 15% 15%;
-    --glass-border: 240 15% 25%;
+    /* Clean card backgrounds */
+    --card: 255 255 255;
+    --card-foreground: 0 0% 5%;
 
-    /* Popover styling */
-    --popover: 240 15% 12%;
-    --popover-foreground: 0 0% 95%;
+    /* Subtle borders */
+    --border: 0 0% 90%;
+    --input: 0 0% 96%;
 
-    /* Financial app colors */
-    --primary: 142 76% 36%;
-    --primary-foreground: 0 0% 98%;
-    --primary-glow: 142 76% 50%;
+    /* Primary accent (Threads blue) */
+    --primary: 0 149 246;
+    --primary-foreground: 255 255 255;
 
-    --secondary: 240 15% 18%;
-    --secondary-foreground: 0 0% 90%;
+    /* Muted colors */
+    --muted: 0 0% 96%;
+    --muted-foreground: 0 0% 45%;
 
-    --muted: 240 15% 20%;
-    --muted-foreground: 240 5% 65%;
+    /* Secondary colors */
+    --secondary: 0 0% 96%;
+    --secondary-foreground: 0 0% 9%;
 
-    --accent: 200 98% 39%;
-    --accent-foreground: 0 0% 98%;
-    --accent-glow: 200 98% 50%;
+    /* Accent colors */
+    --accent: 0 0% 96%;
+    --accent-foreground: 0 0% 9%;
 
-    /* Financial states */
-    --income: 142 76% 36%;
-    --income-light: 142 76% 90%;
-    --expense: 0 84% 60%;
-    --expense-light: 0 84% 95%;
-    --savings: 200 98% 39%;
-    --savings-light: 200 98% 90%;
+    /* Financial colors - subtle and modern */
+    --income: 34 197 94;
+    --expense: 239 68 68;
+    --savings: 59 130 246;
 
-    --destructive: 0 84% 60%;
-    --destructive-foreground: 0 0% 98%;
+    /* Destructive */
+    --destructive: 239 68 68;
+    --destructive-foreground: 255 255 255;
 
-    --border: 240 15% 20%;
-    --input: 240 15% 15%;
-    --ring: 142 76% 50%;
+    /* Ring */
+    --ring: 0 149 246;
 
-    /* Glass morphism */
-    --glass-bg: 240 15% 15% / 0.8;
-    --glass-border: 240 15% 25% / 0.3;
-    --backdrop-blur: blur(20px);
+    /* Popover */
+    --popover: 255 255 255;
+    --popover-foreground: 0 0% 5%;
 
-    /* Gradients */
-    --gradient-primary: linear-gradient(135deg, hsl(142 76% 36%), hsl(200 98% 39%));
-    --gradient-background: linear-gradient(135deg, hsl(240 15% 8%), hsl(240 20% 12%));
-    --gradient-card: linear-gradient(135deg, hsl(240 15% 12% / 0.8), hsl(240 15% 15% / 0.6));
-    --gradient-income: linear-gradient(135deg, hsl(142 76% 36%), hsl(142 76% 50%));
-    --gradient-expense: linear-gradient(135deg, hsl(0 84% 60%), hsl(15 84% 65%));
-    --gradient-savings: linear-gradient(135deg, hsl(200 98% 39%), hsl(220 98% 50%));
-
-    /* Shadows with glow */
-    --shadow-glass: 0 8px 32px hsl(240 15% 5% / 0.4);
-    --shadow-glow: 0 0 40px hsl(142 76% 50% / 0.2);
-    --shadow-floating: 0 20px 40px -10px hsl(240 15% 5% / 0.6);
-
-    --radius: 1rem;
-
-    --sidebar-background: 0 0% 98%;
-    --sidebar-foreground: 240 5.3% 26.1%;
-    --sidebar-primary: 240 5.9% 10%;
-    --sidebar-primary-foreground: 0 0% 98%;
-    --sidebar-accent: 240 4.8% 95.9%;
-    --sidebar-accent-foreground: 240 5.9% 10%;
-    --sidebar-border: 220 13% 91%;
-    --sidebar-ring: 217.2 91.2% 59.8%;
+    /* Radius */
+    --radius: 0.75rem;
   }
 
   .dark {
-    --background: 222.2 84% 4.9%;
-    --foreground: 210 40% 98%;
-    --card: 222.2 84% 4.9%;
-    --card-foreground: 210 40% 98%;
-    --popover: 222.2 84% 4.9%;
-    --popover-foreground: 210 40% 98%;
-    --primary: 210 40% 98%;
-    --primary-foreground: 222.2 47.4% 11.2%;
-    --secondary: 217.2 32.6% 17.5%;
-    --secondary-foreground: 210 40% 98%;
-    --muted: 217.2 32.6% 17.5%;
-    --muted-foreground: 215 20.2% 65.1%;
-    --accent: 217.2 32.6% 17.5%;
-    --accent-foreground: 210 40% 98%;
-    --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 210 40% 98%;
-    --border: 217.2 32.6% 17.5%;
-    --input: 217.2 32.6% 17.5%;
-    --ring: 212.7 26.8% 83.9%;
-    --sidebar-background: 240 5.9% 10%;
-    --sidebar-foreground: 240 4.8% 95.9%;
-    --sidebar-primary: 224.3 76.3% 48%;
-    --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 240 3.7% 15.9%;
-    --sidebar-accent-foreground: 240 4.8% 95.9%;
-    --sidebar-border: 240 3.7% 15.9%;
-    --sidebar-ring: 217.2 91.2% 59.8%;
+    --background: 0 0% 5%;
+    --foreground: 0 0% 98%;
+
+    --card: 0 0% 8%;
+    --card-foreground: 0 0% 98%;
+
+    --border: 0 0% 15%;
+    --input: 0 0% 12%;
+
+    --primary: 0 149 246;
+    --primary-foreground: 255 255 255;
+
+    --muted: 0 0% 12%;
+    --muted-foreground: 0 0% 65%;
+
+    --secondary: 0 0% 12%;
+    --secondary-foreground: 0 0% 98%;
+
+    --accent: 0 0% 12%;
+    --accent-foreground: 0 0% 98%;
+
+    --income: 34 197 94;
+    --expense: 239 68 68;
+    --savings: 59 130 246;
+
+    --destructive: 239 68 68;
+    --destructive-foreground: 255 255 255;
+
+    --ring: 0 149 246;
+
+    --popover: 0 0% 8%;
+    --popover-foreground: 0 0% 98%;
   }
 }
 
 @layer base {
   * {
     @apply border-border;
-  }
-
-  body {
-    @apply bg-background text-foreground;
-    background: var(--gradient-background);
-    min-height: 100vh;
-  }
-
-  /* Hide all scrollbars for modern UI */
-  * {
-    scrollbar-width: none; /* Firefox */
-    -ms-overflow-style: none; /* Internet Explorer 10+ */
+    scrollbar-width: none;
+    -ms-overflow-style: none;
   }
 
   *::-webkit-scrollbar {
-    display: none; /* WebKit */
+    display: none;
   }
 
-  /* Ensure content is still scrollable */
-  .scrollable {
-    overflow-y: auto;
-    overflow-x: hidden;
+  body {
+    @apply bg-background text-foreground font-sans;
+    font-feature-settings: "rlig" 1, "calt" 1;
+  }
+
+  /* Threads-like typography */
+  .threads-text {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    line-height: 1.4;
   }
 }
 
 @layer components {
-  /* Glass morphism utilities */
-  .glass {
-    background: var(--gradient-card);
-    backdrop-filter: var(--backdrop-blur);
-    border: 1px solid hsl(var(--glass-border));
-    box-shadow: var(--shadow-glass);
+  /* Threads-inspired card */
+  .threads-card {
+    @apply bg-card border border-border rounded-xl p-4 transition-all duration-200;
   }
 
-  .glass-floating {
-    @apply glass;
-    box-shadow: var(--shadow-floating);
+  .threads-card:hover {
+    @apply border-border/60;
   }
 
-  .gradient-text {
-    background: var(--gradient-primary);
-    -webkit-background-clip: text;
-    background-clip: text;
-    -webkit-text-fill-color: transparent;
+  /* Threads-style button */
+  .threads-button {
+    @apply bg-primary text-primary-foreground rounded-full px-6 py-2 font-medium text-sm transition-all duration-200;
   }
 
-  .income-gradient {
-    background: var(--gradient-income);
+  .threads-button:hover {
+    @apply bg-primary/90 scale-[1.02];
   }
 
-  .expense-gradient {
-    background: var(--gradient-expense);
+  /* Threads-style input */
+  .threads-input {
+    @apply bg-muted border-0 rounded-xl px-4 py-3 text-sm placeholder:text-muted-foreground focus:ring-2 focus:ring-primary/20 focus:bg-background transition-all duration-200;
   }
 
-  .savings-gradient {
-    background: var(--gradient-savings);
+  /* Clean separator */
+  .threads-separator {
+    @apply border-t border-border/50 my-4;
   }
 
-  .glow-primary {
-    box-shadow: var(--shadow-glow);
+  /* Subtle shadows */
+  .threads-shadow {
+    box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.05);
   }
 
-  /* Enhanced animations */
-  .animate-slide-up {
-    animation: slideUp 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  /* Income/Expense indicators */
+  .income-indicator {
+    @apply text-green-600 bg-green-50 dark:bg-green-950 dark:text-green-400;
   }
 
-  .animate-slide-up-from-bottom {
-    animation: slideUpFromBottom 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  .expense-indicator {
+    @apply text-red-600 bg-red-50 dark:bg-red-950 dark:text-red-400;
   }
 
-  .animate-fade-in {
-    animation: fadeIn 0.6s ease-out;
+  /* Animations */
+  .fade-in {
+    animation: fadeIn 0.3s ease-out;
   }
 
-  .animate-scale-in {
-    animation: scaleIn 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  .slide-up {
+    animation: slideUp 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   }
 
-  .animate-slide-text {
-    animation: slideText 15s linear infinite;
+  .scale-in {
+    animation: scaleIn 0.2s cubic-bezier(0.4, 0, 0.2, 1);
   }
+}
 
-  /* Hover effects */
-  .hover-lift {
-    transition: transform 0.2s ease-in-out;
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
   }
-
-  .hover-lift:hover {
-    transform: translateY(-2px);
+  to {
+    opacity: 1;
+    transform: translateY(0);
   }
 }
 
@@ -218,28 +192,6 @@
   }
 }
 
-@keyframes slideUpFromBottom {
-  from {
-    transform: translateY(100%);
-    opacity: 0;
-  }
-  to {
-    transform: translateY(0);
-    opacity: 1;
-  }
-}
-
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
 @keyframes scaleIn {
   from {
     transform: scale(0.95);
@@ -251,11 +203,8 @@
   }
 }
 
-@keyframes slideText {
-  0% {
-    transform: translateX(100%);
-  }
-  100% {
-    transform: translateX(-100%);
-  }
+/* Hide scrollbars but keep functionality */
+.scrollable {
+  overflow-y: auto;
+  overflow-x: hidden;
 }
