@@ -79,19 +79,23 @@ const Index = () => {
     switch (activeTab) {
       case 'home':
         return (
-          <Dashboard 
-            transactions={transactions} 
-            monthlyBudget={monthlyBudget}
-            onDeleteTransaction={handleDeleteTransaction}
-          />
+          <div className="scrollable">
+            <Dashboard 
+              transactions={transactions} 
+              monthlyBudget={monthlyBudget}
+              onDeleteTransaction={handleDeleteTransaction}
+            />
+          </div>
         );
       case 'budget':
         return (
-          <BudgetView 
-            transactions={transactions} 
-            monthlyBudget={monthlyBudget}
-            onUpdateBudget={handleUpdateBudget}
-          />
+          <div className="scrollable">
+            <BudgetView 
+              transactions={transactions} 
+              monthlyBudget={monthlyBudget}
+              onUpdateBudget={handleUpdateBudget}
+            />
+          </div>
         );
       case 'add-income':
         return (
@@ -111,36 +115,42 @@ const Index = () => {
         );
       case 'calendar':
         return (
-          <div className="flex items-center justify-center h-96 text-muted-foreground">
-            <div className="text-center">
-              <p className="text-lg font-medium">Kalender Transaksi</p>
-              <p className="text-sm">Segera hadir...</p>
+          <div className="scrollable">
+            <div className="flex items-center justify-center h-96 text-muted-foreground">
+              <div className="text-center">
+                <p className="text-lg font-medium">Kalender Transaksi</p>
+                <p className="text-sm">Segera hadir...</p>
+              </div>
             </div>
           </div>
         );
       case 'settings':
         return (
-          <div className="flex items-center justify-center h-96 text-muted-foreground">
-            <div className="text-center">
-              <p className="text-lg font-medium">Pengaturan</p>
-              <p className="text-sm">Segera hadir...</p>
+          <div className="scrollable">
+            <div className="flex items-center justify-center h-96 text-muted-foreground">
+              <div className="text-center">
+                <p className="text-lg font-medium">Pengaturan</p>
+                <p className="text-sm">Segera hadir...</p>
+              </div>
             </div>
           </div>
         );
       default:
         return (
-          <Dashboard 
-            transactions={transactions} 
-            monthlyBudget={monthlyBudget}
-            onDeleteTransaction={handleDeleteTransaction}
-          />
+          <div className="scrollable">
+            <Dashboard 
+              transactions={transactions} 
+              monthlyBudget={monthlyBudget}
+              onDeleteTransaction={handleDeleteTransaction}
+            />
+          </div>
         );
     }
   };
 
   return (
     <div className="min-h-screen bg-background">
-      <div className="max-w-md mx-auto p-4">
+      <div className="max-w-md mx-auto">
         {renderContent()}
         
         <FloatingNavbar

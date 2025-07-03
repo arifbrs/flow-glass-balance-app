@@ -1,4 +1,4 @@
-import { TrendingUp, TrendingDown, Wallet, Target, Edit2, Trash2 } from 'lucide-react';
+import { TrendingUp, TrendingDown, Wallet, Target, Trash2 } from 'lucide-react';
 import { Card } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { useState, useEffect } from 'react';
@@ -82,7 +82,7 @@ const Dashboard = ({ transactions, monthlyBudget, onDeleteTransaction }: Dashboa
   };
 
   return (
-    <div className="space-y-6 pb-24">
+    <div className="space-y-6 pb-28">
       {/* Compact Header with Single Rotating Message */}
       <div className="text-center py-4">
         <div className="overflow-hidden h-12 flex items-center justify-center">
@@ -98,7 +98,7 @@ const Dashboard = ({ transactions, monthlyBudget, onDeleteTransaction }: Dashboa
       </div>
 
       {/* Enhanced Balance Card */}
-      <Card className="glass p-6 text-center relative overflow-hidden">
+      <Card className="glass p-6 text-center relative overflow-hidden border-0">
         <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-accent/5"></div>
         <div className="relative space-y-3">
           <p className="text-muted-foreground text-sm font-medium">Saldo Saat Ini</p>
@@ -120,7 +120,7 @@ const Dashboard = ({ transactions, monthlyBudget, onDeleteTransaction }: Dashboa
 
       {/* Enhanced Stats Grid */}
       <div className="grid grid-cols-2 gap-4">
-        <Card className="glass p-5 hover:scale-105 transition-transform duration-200">
+        <Card className="glass p-5 hover:scale-105 transition-transform duration-200 border-0">
           <div className="flex items-center space-x-3">
             <div className="w-12 h-12 rounded-2xl income-gradient flex items-center justify-center shadow-lg">
               <TrendingUp className="w-6 h-6 text-white" />
@@ -132,7 +132,7 @@ const Dashboard = ({ transactions, monthlyBudget, onDeleteTransaction }: Dashboa
           </div>
         </Card>
 
-        <Card className="glass p-5 hover:scale-105 transition-transform duration-200">
+        <Card className="glass p-5 hover:scale-105 transition-transform duration-200 border-0">
           <div className="flex items-center space-x-3">
             <div className="w-12 h-12 rounded-2xl expense-gradient flex items-center justify-center shadow-lg">
               <TrendingDown className="w-6 h-6 text-white" />
@@ -147,7 +147,7 @@ const Dashboard = ({ transactions, monthlyBudget, onDeleteTransaction }: Dashboa
 
       {/* Budget Progress - Only show if budget is set */}
       {monthlyBudget > 0 && (
-        <Card className="glass p-6">
+        <Card className="glass p-6 border-0">
           <div className="space-y-4">
             <div className="flex items-center justify-between">
               <div className="flex items-center space-x-2">
@@ -191,7 +191,7 @@ const Dashboard = ({ transactions, monthlyBudget, onDeleteTransaction }: Dashboa
       )}
 
       {/* Enhanced Recent Transactions */}
-      <Card className="glass p-6">
+      <Card className="glass p-6 border-0">
         <div className="space-y-4">
           <div className="flex items-center justify-between">
             <div className="flex items-center space-x-2">
@@ -209,7 +209,7 @@ const Dashboard = ({ transactions, monthlyBudget, onDeleteTransaction }: Dashboa
             <div className="space-y-3">
               {recentTransactions.map((transaction) => (
                 <div key={transaction.id} className="group relative">
-                  <div className="flex items-center justify-between p-4 rounded-2xl glass hover:bg-muted/20 transition-all duration-200">
+                  <div className="flex items-center justify-between p-4 rounded-2xl glass hover:bg-muted/20 transition-all duration-200 border-0">
                     <div className="flex items-center space-x-3 flex-1">
                       <div className={`w-10 h-10 rounded-xl flex items-center justify-center ${
                         transaction.type === 'income' ? 'income-gradient' : 'expense-gradient'

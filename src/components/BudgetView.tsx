@@ -90,9 +90,9 @@ const BudgetView = ({ transactions, monthlyBudget, onUpdateBudget }: BudgetViewP
   };
 
   return (
-    <div className="space-y-6 pb-24">
+    <div className="space-y-6 pb-28">
       {/* Header */}
-      <div className="text-center space-y-2">
+      <div className="text-center space-y-2 pt-4">
         <h1 className="text-2xl font-bold gradient-text">Anggaran Bulanan</h1>
         <p className="text-muted-foreground">
           {new Date().toLocaleDateString('id-ID', { month: 'long', year: 'numeric' })}
@@ -100,7 +100,7 @@ const BudgetView = ({ transactions, monthlyBudget, onUpdateBudget }: BudgetViewP
       </div>
 
       {/* Budget Setting Card */}
-      <Card className="glass p-6">
+      <Card className="glass p-6 border-0">
         <div className="space-y-4">
           <div className="flex items-center justify-between">
             <div className="flex items-center space-x-2">
@@ -129,7 +129,7 @@ const BudgetView = ({ transactions, monthlyBudget, onUpdateBudget }: BudgetViewP
                     value={displayBudget}
                     onChange={(e) => handleBudgetInputChange(e.target.value)}
                     placeholder="Masukkan jumlah anggaran"
-                    className="pl-10 glass text-lg h-12"
+                    className="pl-10 glass text-lg h-12 border-0"
                   />
                 </div>
                 <Button
@@ -176,7 +176,7 @@ const BudgetView = ({ transactions, monthlyBudget, onUpdateBudget }: BudgetViewP
 
       {/* Budget Progress - Only show if budget is set */}
       {monthlyBudget > 0 && (
-        <Card className="glass p-6">
+        <Card className="glass p-6 border-0">
           <div className="space-y-4">
             <h3 className="font-medium">Progress Anggaran</h3>
             
@@ -241,7 +241,7 @@ const BudgetView = ({ transactions, monthlyBudget, onUpdateBudget }: BudgetViewP
 
       {/* Category Breakdown - Only show if there are expenses */}
       {sortedCategories.length > 0 && (
-        <Card className="glass p-6">
+        <Card className="glass p-6 border-0">
           <div className="space-y-4">
             <h3 className="font-medium">Kategori Pengeluaran Teratas</h3>
             
@@ -273,7 +273,7 @@ const BudgetView = ({ transactions, monthlyBudget, onUpdateBudget }: BudgetViewP
       )}
 
       {/* Budget Tips */}
-      <Card className="glass p-6">
+      <Card className="glass p-6 border-0">
         <div className="space-y-4">
           <h3 className="font-medium">Tips Mengelola Anggaran</h3>
           <div className="space-y-3">
