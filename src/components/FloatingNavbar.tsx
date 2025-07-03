@@ -102,12 +102,12 @@ const FloatingNavbar = ({ activeTab, onTabChange }: FloatingNavbarProps) => {
                 );
               })}
 
-              {/* Add Button - Blue circle in center */}
+              {/* Add Button - Updated to match screenshot style */}
               <button
                 onClick={handleAddClick}
-                className="w-12 h-12 rounded-full bg-blue-600 dark:bg-blue-500 text-white shadow-lg hover:bg-blue-700 dark:hover:bg-blue-600 transition-all duration-200 hover:scale-105 active:scale-95 flex items-center justify-center absolute left-1/2 transform -translate-x-1/2"
+                className="w-14 h-14 rounded-full bg-blue-500 hover:bg-blue-600 text-white shadow-xl transition-all duration-200 hover:scale-110 active:scale-95 flex items-center justify-center absolute left-1/2 transform -translate-x-1/2 -translate-y-1 border-4 border-gray-900 dark:border-black"
               >
-                <Plus className={`w-6 h-6 text-white transition-transform duration-200 ${isAddMenuOpen ? 'rotate-45' : ''}`} />
+                <Plus className={`w-7 h-7 text-white transition-transform duration-200 ${isAddMenuOpen ? 'rotate-45' : ''}`} />
               </button>
             </div>
           </div>
