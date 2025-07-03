@@ -73,11 +73,11 @@ const FloatingNavbar = ({ activeTab, onTabChange }: FloatingNavbarProps) => {
         </div>
       )}
 
-      {/* Bottom Navigation - NEW DESIGN LIKE THE IMAGE */}
+      {/* Bottom Navigation - Tab Bar Style like the image */}
       <div className="fixed bottom-0 left-0 right-0 z-50 p-4">
-        <div className="max-w-sm mx-auto relative">
-          {/* Main Navigation Container */}
-          <div className="bg-gray-800 dark:bg-gray-900 rounded-3xl px-6 py-4 shadow-2xl relative overflow-visible">
+        <div className="max-w-sm mx-auto">
+          {/* Navigation Container - Dark rounded bar */}
+          <div className="bg-gray-900 dark:bg-black rounded-full px-4 py-3 shadow-2xl">
             <div className="flex items-center justify-between relative">
               {/* Navigation Items */}
               {navItems.map((item, index) => {
@@ -85,38 +85,30 @@ const FloatingNavbar = ({ activeTab, onTabChange }: FloatingNavbarProps) => {
                 const isActive = activeTab === item.id;
                 
                 return (
-                  <div key={item.id} className="relative">
-                    {/* Active Tab - Green Circle that pops out */}
+                  <button
+                    key={item.id}
+                    onClick={() => onTabChange(item.id)}
+                    className={`relative flex items-center space-x-2 px-4 py-2 rounded-full transition-all duration-300 ${
+                      isActive 
+                        ? 'bg-white text-gray-900' 
+                        : 'text-gray-400 hover:text-gray-200'
+                    }`}
+                  >
+                    <Icon className="w-5 h-5" />
                     {isActive && (
-                      <div className="absolute -top-8 left-1/2 transform -translate-x-1/2 w-14 h-14 bg-green-500 rounded-full flex items-center justify-center shadow-lg z-10">
-                        <Icon className="w-6 h-6 text-white" />
-                      </div>
+                      <span className="text-sm font-medium">{item.label}</span>
                     )}
-                    
-                    {/* Regular Tab Button */}
-                    <button
-                      onClick={() => onTabChange(item.id)}
-                      className={`p-3 rounded-full transition-all duration-200 ${
-                        isActive 
-                          ? 'opacity-0' // Hide the regular button when active
-                          : 'text-gray-400 hover:text-white'
-                      }`}
-                    >
-                      <Icon className="w-6 h-6" />
-                    </button>
-                  </div>
+                  </button>
                 );
               })}
 
-              {/* Add Button - Center position */}
-              <div className="absolute left-1/2 transform -translate-x-1/2 -top-8">
-                <button
-                  onClick={handleAddClick}
-                  className="w-14 h-14 rounded-full bg-blue-600 dark:bg-blue-500 text-white shadow-lg hover:bg-blue-700 dark:hover:bg-blue-600 transition-all duration-200 hover:scale-105 active:scale-95 flex items-center justify-center"
-                >
-                  <Plus className={`w-6 h-6 text-white transition-transform duration-200 ${isAddMenuOpen ? 'rotate-45' : ''}`} />
-                </button>
-              </div>
+              {/* Add Button - Blue circle in center */}
+              <button
+                onClick={handleAddClick}
+                className="w-12 h-12 rounded-full bg-blue-600 dark:bg-blue-500 text-white shadow-lg hover:bg-blue-700 dark:hover:bg-blue-600 transition-all duration-200 hover:scale-105 active:scale-95 flex items-center justify-center absolute left-1/2 transform -translate-x-1/2"
+              >
+                <Plus className={`w-6 h-6 text-white transition-transform duration-200 ${isAddMenuOpen ? 'rotate-45' : ''}`} />
+              </button>
             </div>
           </div>
         </div>
