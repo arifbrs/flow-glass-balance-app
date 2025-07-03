@@ -2,37 +2,37 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Modern Design System with Proper Contrast */
+/* Modern Design System with Perfect Contrast and Spacing */
 
 @layer base {
   :root {
-    /* Light theme - high contrast */
-    --background: 248 250 252;
-    --foreground: 15 23 42;
+    /* Light theme - high contrast colors */
+    --background: 249 250 251;
+    --foreground: 17 24 39;
 
     /* Clean card backgrounds */
     --card: 255 255 255;
-    --card-foreground: 15 23 42;
+    --card-foreground: 17 24 39;
 
     /* Visible borders */
-    --border: 226 232 240;
-    --input: 241 245 249;
+    --border: 229 231 235;
+    --input: 243 244 246;
 
     /* Primary accent (Blue) */
     --primary: 59 130 246;
     --primary-foreground: 255 255 255;
 
     /* Muted colors with good contrast */
-    --muted: 241 245 249;
-    --muted-foreground: 71 85 105;
+    --muted: 243 244 246;
+    --muted-foreground: 75 85 99;
 
     /* Secondary colors */
-    --secondary: 241 245 249;
-    --secondary-foreground: 15 23 42;
+    --secondary: 243 244 246;
+    --secondary-foreground: 17 24 39;
 
     /* Accent colors */
-    --accent: 241 245 249;
-    --accent-foreground: 15 23 42;
+    --accent: 243 244 246;
+    --accent-foreground: 17 24 39;
 
     /* Financial colors */
     --income: 34 197 94;
@@ -48,33 +48,33 @@
 
     /* Popover */
     --popover: 255 255 255;
-    --popover-foreground: 15 23 42;
+    --popover-foreground: 17 24 39;
 
     /* Radius */
-    --radius: 0.75rem;
+    --radius: 1rem;
   }
 
   .dark {
-    /* Dark theme - high contrast */
-    --background: 2 6 23;
+    /* Dark theme - high contrast colors */
+    --background: 15 23 42;
     --foreground: 248 250 252;
 
-    --card: 15 23 42;
+    --card: 30 41 59;
     --card-foreground: 248 250 252;
 
     --border: 51 65 85;
-    --input: 30 41 59;
+    --input: 51 65 85;
 
     --primary: 59 130 246;
     --primary-foreground: 255 255 255;
 
-    --muted: 30 41 59;
+    --muted: 51 65 85;
     --muted-foreground: 148 163 184;
 
-    --secondary: 30 41 59;
+    --secondary: 51 65 85;
     --secondary-foreground: 248 250 252;
 
-    --accent: 30 41 59;
+    --accent: 51 65 85;
     --accent-foreground: 248 250 252;
 
     --income: 34 197 94;
@@ -86,7 +86,7 @@
 
     --ring: 59 130 246;
 
-    --popover: 15 23 42;
+    --popover: 30 41 59;
     --popover-foreground: 248 250 252;
   }
 }
@@ -105,59 +105,75 @@
   body {
     @apply bg-background text-foreground font-sans;
     font-feature-settings: "rlig" 1, "calt" 1;
+    line-height: 1.6;
   }
 
-  /* Modern typography with good contrast */
-  .threads-text {
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-    line-height: 1.5;
+  /* Modern typography with perfect contrast */
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-bold;
+    line-height: 1.2;
+  }
+
+  p {
+    line-height: 1.6;
   }
 }
 
 @layer components {
-  /* Modern card with proper contrast */
-  .threads-card {
-    @apply bg-card border border-border rounded-2xl p-6 transition-all duration-200;
+  /* Modern card with perfect spacing */
+  .modern-card {
+    @apply bg-white dark:bg-slate-800 border border-gray-200 dark:border-gray-700 rounded-2xl p-6 transition-all duration-200;
   }
 
-  .threads-card:hover {
-    @apply border-border/60 shadow-sm;
+  .modern-card:hover {
+    @apply border-gray-300 dark:border-gray-600 shadow-sm;
   }
 
-  /* Modern button with good contrast */
-  .threads-button {
-    @apply bg-primary text-primary-foreground rounded-2xl px-6 py-3 font-medium text-sm transition-all duration-200;
+  /* Modern button with perfect contrast */
+  .modern-button {
+    @apply bg-blue-600 hover:bg-blue-700 text-white rounded-2xl px-6 py-3 font-semibold text-sm transition-all duration-200;
   }
 
-  .threads-button:hover {
-    @apply bg-primary/90 scale-[1.02];
+  .modern-button:hover {
+    @apply scale-[1.02];
   }
 
   /* Modern input with visible borders */
-  .threads-input {
-    @apply bg-card border border-border rounded-xl px-4 py-3 text-sm placeholder:text-muted-foreground focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all duration-200;
+  .modern-input {
+    @apply bg-white dark:bg-slate-800 border border-gray-200 dark:border-gray-700 rounded-xl px-4 py-3 text-sm text-gray-900 dark:text-white placeholder:text-gray-500 dark:placeholder:text-gray-400 focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition-all duration-200;
   }
 
-  /* Clean separator */
-  .threads-separator {
-    @apply border-t border-border/50 my-6;
-  }
+  /* Perfect spacing system */
+  .spacing-xs { @apply space-y-2; }
+  .spacing-sm { @apply space-y-3; }
+  .spacing-md { @apply space-y-4; }
+  .spacing-lg { @apply space-y-6; }
+  .spacing-xl { @apply space-y-8; }
 
-  /* Modern shadows */
-  .threads-shadow {
-    box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px 0 rgb(0 0 0 / 0.06);
-  }
+  /* Padding system */
+  .padding-xs { @apply p-2; }
+  .padding-sm { @apply p-3; }
+  .padding-md { @apply p-4; }
+  .padding-lg { @apply p-6; }
+  .padding-xl { @apply p-8; }
 
-  /* Income/Expense indicators with good contrast */
+  /* Margin system */
+  .margin-xs { @apply m-2; }
+  .margin-sm { @apply m-3; }
+  .margin-md { @apply m-4; }
+  .margin-lg { @apply m-6; }
+  .margin-xl { @apply m-8; }
+
+  /* Income/Expense indicators with perfect contrast */
   .income-indicator {
-    @apply text-green-700 bg-green-50 dark:bg-green-950 dark:text-green-300;
+    @apply text-green-700 dark:text-green-300 bg-green-50 dark:bg-green-950;
   }
 
   .expense-indicator {
-    @apply text-red-700 bg-red-50 dark:bg-red-950 dark:text-red-300;
+    @apply text-red-700 dark:text-red-300 bg-red-50 dark:bg-red-950;
   }
 
-  /* Animations */
+  /* Smooth animations */
   .fade-in {
     animation: fadeIn 0.5s ease-out;
   }
@@ -210,14 +226,14 @@
   overflow-x: hidden;
 }
 
-/* Improved focus states with high contrast */
+/* Perfect focus states with high contrast */
 .focus-visible\:ring-2:focus-visible {
   outline: 2px solid transparent;
   outline-offset: 2px;
-  box-shadow: 0 0 0 2px hsl(var(--ring));
+  box-shadow: 0 0 0 2px rgb(59 130 246 / 0.5);
 }
 
-/* Better button hover states */
+/* Better button interactions */
 button:hover {
   transform: translateY(-1px);
 }
@@ -231,9 +247,9 @@ button, input, textarea, select {
   transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-/* High contrast text colors */
+/* High contrast text utilities */
 .text-high-contrast {
-  @apply text-gray-900 dark:text-gray-100;
+  @apply text-gray-900 dark:text-white;
 }
 
 .text-medium-contrast {
@@ -244,7 +260,7 @@ button, input, textarea, select {
   @apply text-gray-500 dark:text-gray-400;
 }
 
-/* Icon colors with proper contrast */
+/* Icon colors with perfect contrast */
 .icon-primary {
   @apply text-blue-600 dark:text-blue-400;
 }
@@ -255,4 +271,27 @@ button, input, textarea, select {
 
 .icon-muted {
   @apply text-gray-500 dark:text-gray-400;
+}
+
+/* Perfect navbar styling */
+.navbar-item {
+  @apply text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white;
+}
+
+.navbar-item-active {
+  @apply text-blue-600 dark:text-blue-400 bg-blue-50 dark:bg-blue-950/50;
+}
+
+/* Consistent border radius */
+.rounded-modern {
+  @apply rounded-2xl;
+}
+
+/* Perfect shadows */
+.shadow-modern {
+  box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px 0 rgb(0 0 0 / 0.06);
+}
+
+.shadow-modern-lg {
+  box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -1px rgb(0 0 0 / 0.06);
 }
