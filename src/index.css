@@ -2,41 +2,73 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
-All colors MUST be HSL.
-*/
+/* Modern Finance PWA Design System - Gradients & Glass Effects */
 
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
+    /* Modern gradient backgrounds */
+    --background: 240 15% 8%;
+    --foreground: 0 0% 98%;
 
-    --card: 0 0% 100%;
-    --card-foreground: 222.2 84% 4.9%;
+    /* Glass morphism cards */
+    --card: 240 15% 12%;
+    --card-foreground: 0 0% 95%;
+    --glass: 240 15% 15%;
+    --glass-border: 240 15% 25%;
 
-    --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
+    /* Popover styling */
+    --popover: 240 15% 12%;
+    --popover-foreground: 0 0% 95%;
 
-    --primary: 222.2 47.4% 11.2%;
-    --primary-foreground: 210 40% 98%;
+    /* Financial app colors */
+    --primary: 142 76% 36%;
+    --primary-foreground: 0 0% 98%;
+    --primary-glow: 142 76% 50%;
 
-    --secondary: 210 40% 96.1%;
-    --secondary-foreground: 222.2 47.4% 11.2%;
+    --secondary: 240 15% 18%;
+    --secondary-foreground: 0 0% 90%;
 
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
+    --muted: 240 15% 20%;
+    --muted-foreground: 240 5% 65%;
 
-    --accent: 210 40% 96.1%;
-    --accent-foreground: 222.2 47.4% 11.2%;
+    --accent: 200 98% 39%;
+    --accent-foreground: 0 0% 98%;
+    --accent-glow: 200 98% 50%;
 
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 40% 98%;
+    /* Financial states */
+    --income: 142 76% 36%;
+    --income-light: 142 76% 90%;
+    --expense: 0 84% 60%;
+    --expense-light: 0 84% 95%;
+    --savings: 200 98% 39%;
+    --savings-light: 200 98% 90%;
 
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
-    --ring: 222.2 84% 4.9%;
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 98%;
 
-    --radius: 0.5rem;
+    --border: 240 15% 20%;
+    --input: 240 15% 15%;
+    --ring: 142 76% 50%;
+
+    /* Glass morphism */
+    --glass-bg: 240 15% 15% / 0.8;
+    --glass-border: 240 15% 25% / 0.3;
+    --backdrop-blur: blur(20px);
+
+    /* Gradients */
+    --gradient-primary: linear-gradient(135deg, hsl(142 76% 36%), hsl(200 98% 39%));
+    --gradient-background: linear-gradient(135deg, hsl(240 15% 8%), hsl(240 20% 12%));
+    --gradient-card: linear-gradient(135deg, hsl(240 15% 12% / 0.8), hsl(240 15% 15% / 0.6));
+    --gradient-income: linear-gradient(135deg, hsl(142 76% 36%), hsl(142 76% 50%));
+    --gradient-expense: linear-gradient(135deg, hsl(0 84% 60%), hsl(15 84% 65%));
+    --gradient-savings: linear-gradient(135deg, hsl(200 98% 39%), hsl(220 98% 50%));
+
+    /* Shadows with glow */
+    --shadow-glass: 0 8px 32px hsl(240 15% 5% / 0.4);
+    --shadow-glow: 0 0 40px hsl(142 76% 50% / 0.2);
+    --shadow-floating: 0 20px 40px -10px hsl(240 15% 5% / 0.6);
+
+    --radius: 1rem;
 
     --sidebar-background: 0 0% 98%;
 
@@ -101,5 +133,91 @@ All colors MUST be HSL.
 
   body {
     @apply bg-background text-foreground;
+    background: var(--gradient-background);
+    min-height: 100vh;
+  }
+}
+
+@layer components {
+  /* Glass morphism utilities */
+  .glass {
+    background: var(--gradient-card);
+    backdrop-filter: var(--backdrop-blur);
+    border: 1px solid hsl(var(--glass-border));
+    box-shadow: var(--shadow-glass);
+  }
+
+  .glass-floating {
+    @apply glass;
+    box-shadow: var(--shadow-floating);
+  }
+
+  .gradient-text {
+    background: var(--gradient-primary);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  .income-gradient {
+    background: var(--gradient-income);
+  }
+
+  .expense-gradient {
+    background: var(--gradient-expense);
+  }
+
+  .savings-gradient {
+    background: var(--gradient-savings);
+  }
+
+  .glow-primary {
+    box-shadow: var(--shadow-glow);
+  }
+
+  /* Mobile-first animations */
+  .animate-slide-up {
+    animation: slideUp 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .animate-fade-in {
+    animation: fadeIn 0.3s ease-out;
+  }
+
+  .animate-scale-in {
+    animation: scaleIn 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+}
+
+@keyframes slideUp {
+  from {
+    transform: translateY(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes scaleIn {
+  from {
+    transform: scale(0.95);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
   }
 }
