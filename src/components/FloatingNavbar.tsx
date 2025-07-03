@@ -34,9 +34,8 @@ const FloatingNavbar = ({ activeTab, onTabChange }: FloatingNavbarProps) => {
           onClick={() => setIsAddMenuOpen(false)}
         >
           <div className="fixed bottom-32 left-1/2 transform -translate-x-1/2">
-            {/* FIXED: Removed slide animation, kept perfect spacing and layout */}
             <div className="bg-white/95 dark:bg-slate-800/95 backdrop-blur-lg border border-gray-200/50 dark:border-gray-700/50 rounded-3xl p-5 space-y-4 w-64 shadow-2xl">
-              {/* Add Income Button - Perfect spacing */}
+              {/* Add Income Button */}
               <button
                 onClick={() => {
                   onTabChange('add-income');
@@ -53,7 +52,7 @@ const FloatingNavbar = ({ activeTab, onTabChange }: FloatingNavbarProps) => {
                 </div>
               </button>
 
-              {/* Add Expense Button - Perfect spacing */}
+              {/* Add Expense Button */}
               <button
                 onClick={() => {
                   onTabChange('add-expense');
@@ -74,73 +73,50 @@ const FloatingNavbar = ({ activeTab, onTabChange }: FloatingNavbarProps) => {
         </div>
       )}
 
-      {/* Bottom Navigation - Perfect center layout */}
+      {/* Bottom Navigation - NEW DESIGN LIKE THE IMAGE */}
       <div className="fixed bottom-0 left-0 right-0 z-50 p-4">
-        <div className="max-w-sm mx-auto">
-          <div className="bg-white/95 dark:bg-slate-900/95 backdrop-blur-lg border border-gray-200 dark:border-gray-700 rounded-2xl px-4 py-3 shadow-xl">
-            {/* Perfect Grid Layout */}
-            <div className="grid grid-cols-5 items-center gap-2">
-              {/* Home */}
-              <button
-                onClick={() => onTabChange('home')}
-                className={`relative p-2 rounded-xl transition-all duration-200 flex flex-col items-center space-y-1 ${
-                  activeTab === 'home'
-                    ? 'text-blue-600 dark:text-blue-400 bg-blue-50 dark:bg-blue-950/50' 
-                    : 'text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-gray-800'
-                }`}
-              >
-                <Home className={`w-5 h-5 ${activeTab === 'home' ? 'scale-110' : ''} transition-transform duration-200`} />
-                <span className="text-xs font-medium">Home</span>
-              </button>
+        <div className="max-w-sm mx-auto relative">
+          {/* Main Navigation Container */}
+          <div className="bg-gray-800 dark:bg-gray-900 rounded-3xl px-6 py-4 shadow-2xl relative overflow-visible">
+            <div className="flex items-center justify-between relative">
+              {/* Navigation Items */}
+              {navItems.map((item, index) => {
+                const Icon = item.icon;
+                const isActive = activeTab === item.id;
+                
+                return (
+                  <div key={item.id} className="relative">
+                    {/* Active Tab - Green Circle that pops out */}
+                    {isActive && (
+                      <div className="absolute -top-8 left-1/2 transform -translate-x-1/2 w-14 h-14 bg-green-500 rounded-full flex items-center justify-center shadow-lg z-10">
+                        <Icon className="w-6 h-6 text-white" />
+                      </div>
+                    )}
+                    
+                    {/* Regular Tab Button */}
+                    <button
+                      onClick={() => onTabChange(item.id)}
+                      className={`p-3 rounded-full transition-all duration-200 ${
+                        isActive 
+                          ? 'opacity-0' // Hide the regular button when active
+                          : 'text-gray-400 hover:text-white'
+                      }`}
+                    >
+                      <Icon className="w-6 h-6" />
+                    </button>
+                  </div>
+                );
+              })}
 
-              {/* Budget */}
-              <button
-                onClick={() => onTabChange('budget')}
-                className={`relative p-2 rounded-xl transition-all duration-200 flex flex-col items-center space-y-1 ${
-                  activeTab === 'budget'
-                    ? 'text-blue-600 dark:text-blue-400 bg-blue-50 dark:bg-blue-950/50' 
-                    : 'text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-gray-800'
-                }`}
-              >
-                <PieChart className={`w-5 h-5 ${activeTab === 'budget' ? 'scale-110' : ''} transition-transform duration-200`} />
-                <span className="text-xs font-medium">Budget</span>
-              </button>
-
-              {/* Add Button - CENTER POSITION */}
-              <div className="flex justify-center">
+              {/* Add Button - Center position */}
+              <div className="absolute left-1/2 transform -translate-x-1/2 -top-8">
                 <button
                   onClick={handleAddClick}
-                  className="p-3 rounded-full bg-blue-600 dark:bg-blue-500 text-white shadow-lg hover:bg-blue-700 dark:hover:bg-blue-600 transition-all duration-200 hover:scale-105 active:scale-95"
+                  className="w-14 h-14 rounded-full bg-blue-600 dark:bg-blue-500 text-white shadow-lg hover:bg-blue-700 dark:hover:bg-blue-600 transition-all duration-200 hover:scale-105 active:scale-95 flex items-center justify-center"
                 >
-                  <Plus className={`w-5 h-5 text-white transition-transform duration-200 ${isAddMenuOpen ? 'rotate-45' : ''}`} />
+                  <Plus className={`w-6 h-6 text-white transition-transform duration-200 ${isAddMenuOpen ? 'rotate-45' : ''}`} />
                 </button>
               </div>
-
-              {/* Calendar */}
-              <button
-                onClick={() => onTabChange('calendar')}
-                className={`relative p-2 rounded-xl transition-all duration-200 flex flex-col items-center space-y-1 ${
-                  activeTab === 'calendar'
-                    ? 'text-blue-600 dark:text-blue-400 bg-blue-50 dark:bg-blue-950/50' 
-                    : 'text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-gray-800'
-                }`}
-              >
-                <Calendar className={`w-5 h-5 ${activeTab === 'calendar' ? 'scale-110' : ''} transition-transform duration-200`} />
-                <span className="text-xs font-medium">Calendar</span>
-              </button>
-
-              {/* Settings */}
-              <button
-                onClick={() => onTabChange('settings')}
-                className={`relative p-2 rounded-xl transition-all duration-200 flex flex-col items-center space-y-1 ${
-                  activeTab === 'settings'
-                    ? 'text-blue-600 dark:text-blue-400 bg-blue-50 dark:bg-blue-950/50' 
-                    : 'text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-gray-800'
-                }`}
-              >
-                <Settings className={`w-5 h-5 ${activeTab === 'settings' ? 'scale-110' : ''} transition-transform duration-200`} />
-                <span className="text-xs font-medium">Settings</span>
-              </button>
             </div>
           </div>
         </div>
