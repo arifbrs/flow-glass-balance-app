@@ -17,7 +17,7 @@ interface Transaction {
 const Index = () => {
   const [activeTab, setActiveTab] = useState('home');
   const [transactions, setTransactions] = useState<Transaction[]>([]);
-  const [monthlyBudget, setMonthlyBudget] = useState(2000); // Default budget
+  const [monthlyBudget, setMonthlyBudget] = useState(0); // Start with no budget
   const { toast } = useToast();
 
   // Load data from localStorage
@@ -52,25 +52,39 @@ const Index = () => {
     setTransactions(prev => [newTransaction, ...prev]);
     
     toast({
-      title: "Transaksi Ditambahkan",
-      description: `${transactionData.type === 'income' ? 'Pemasukan' : 'Pengeluaran'} sebesar Rp${transactionData.amount.toLocaleString('id-ID')} berhasil ditambahkan`,
+      title: "Transaksi Berhasil Ditambahkan! 🎉",
+      description: `${transactionData.type === 'income' ? 'Pemasukan' : 'Pengeluaran'} sebesar Rp${new Intl.NumberFormat('id-ID').format(transactionData.amount)} berhasil disimpan`,
     });
 
     setActiveTab('home');
   };
 
+  const handleDeleteTransaction = (id: string) => {
+    setTransactions(prev => prev.filter(t => t.id !== id));
+    toast({
+      title: "Transaksi Dihapus",
+      description: "Transaksi berhasil dihapus dari catatan",
+    });
+  };
+
   const handleUpdateBudget = (budget: number) => {
     setMonthlyBudget(budget);
     toast({
-      title: "Anggaran Diperbarui", 
-      description: `Anggaran bulanan diatur ke Rp${budget.toLocaleString('id-ID')}`,
+      title: "Anggaran Berhasil Diperbarui! 💰", 
+      description: `Anggaran bulanan diatur ke Rp${new Intl.NumberFormat('id-ID').format(budget)}`,
     });
   };
 
   const renderContent = () => {
     switch (activeTab) {
       case 'home':
-        return <Dashboard transactions={transactions} monthlyBudget={monthlyBudget} />;
+        return (
+          <Dashboard 
+            transactions={transactions} 
+            monthlyBudget={monthlyBudget}
+            onDeleteTransaction={handleDeleteTransaction}
+          />
+        );
       case 'budget':
         return (
           <BudgetView 
@@ -99,8 +113,8 @@ const Index = () => {
         return (
           <div className="flex items-center justify-center h-96 text-muted-foreground">
             <div className="text-center">
-              <p className="text-lg font-medium">Calendar View</p>
-              <p className="text-sm">Coming soon...</p>
+              <p className="text-lg font-medium">Kalender Transaksi</p>
+              <p className="text-sm">Segera hadir...</p>
             </div>
           </div>
         );
@@ -108,13 +122,19 @@ const Index = () => {
         return (
           <div className="flex items-center justify-center h-96 text-muted-foreground">
             <div className="text-center">
-              <p className="text-lg font-medium">Settings</p>
-              <p className="text-sm">Coming soon...</p>
+              <p className="text-lg font-medium">Pengaturan</p>
+              <p className="text-sm">Segera hadir...</p>
             </div>
           </div>
         );
       default:
-        return <Dashboard transactions={transactions} monthlyBudget={monthlyBudget} />;
+        return (
+          <Dashboard 
+            transactions={transactions} 
+            monthlyBudget={monthlyBudget}
+            onDeleteTransaction={handleDeleteTransaction}
+          />
+        );
     }
   };
 

@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Target, Edit2, Check, X, TrendingUp, TrendingDown } from 'lucide-react';
+import { Target, Edit2, Check, X, TrendingUp, TrendingDown, Plus } from 'lucide-react';
 import { Card } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -21,7 +21,8 @@ interface BudgetViewProps {
 
 const BudgetView = ({ transactions, monthlyBudget, onUpdateBudget }: BudgetViewProps) => {
   const [isEditingBudget, setIsEditingBudget] = useState(false);
-  const [budgetInput, setBudgetInput] = useState(monthlyBudget.toString());
+  const [budgetInput, setBudgetInput] = useState('');
+  const [displayBudget, setDisplayBudget] = useState('');
 
   const currentMonth = new Date().getMonth();
   const currentYear = new Date().getFullYear();
@@ -51,26 +52,50 @@ const BudgetView = ({ transactions, monthlyBudget, onUpdateBudget }: BudgetViewP
     .sort(([,a], [,b]) => b - a)
     .slice(0, 5);
 
+  const formatCurrency = (amount: number) => {
+    return new Intl.NumberFormat('id-ID').format(amount);
+  };
+
+  const formatCurrencyInput = (value: string) => {
+    const number = value.replace(/\D/g, '');
+    return new Intl.NumberFormat('id-ID').format(parseInt(number) || 0);
+  };
+
+  const handleBudgetInputChange = (value: string) => {
+    const numericValue = value.replace(/\D/g, '');
+    setBudgetInput(numericValue);
+    setDisplayBudget(formatCurrencyInput(numericValue));
+  };
+
   const handleBudgetSave = () => {
     const newBudget = parseFloat(budgetInput);
     if (!isNaN(newBudget) && newBudget >= 0) {
       onUpdateBudget(newBudget);
       setIsEditingBudget(false);
+      setBudgetInput('');
+      setDisplayBudget('');
     }
   };
 
   const handleBudgetCancel = () => {
-    setBudgetInput(monthlyBudget.toString());
+    setBudgetInput('');
+    setDisplayBudget('');
     setIsEditingBudget(false);
+  };
+
+  const handleSetBudget = () => {
+    setIsEditingBudget(true);
+    setBudgetInput(monthlyBudget.toString());
+    setDisplayBudget(formatCurrency(monthlyBudget));
   };
 
   return (
     <div className="space-y-6 pb-24">
       {/* Header */}
       <div className="text-center space-y-2">
-        <h1 className="text-2xl font-bold gradient-text">Monthly Budget</h1>
+        <h1 className="text-2xl font-bold gradient-text">Anggaran Bulanan</h1>
         <p className="text-muted-foreground">
-          {new Date().toLocaleDateString('en-US', { month: 'long', year: 'numeric' })}
+          {new Date().toLocaleDateString('id-ID', { month: 'long', year: 'numeric' })}
         </p>
       </div>
 
@@ -80,16 +105,16 @@ const BudgetView = ({ transactions, monthlyBudget, onUpdateBudget }: BudgetViewP
           <div className="flex items-center justify-between">
             <div className="flex items-center space-x-2">
               <Target className="w-5 h-5 text-accent" />
-              <span className="font-medium">Monthly Budget</span>
+              <span className="font-medium">Anggaran Bulanan</span>
             </div>
             {!isEditingBudget && (
               <Button
                 variant="ghost"
                 size="sm"
-                onClick={() => setIsEditingBudget(true)}
+                onClick={handleSetBudget}
                 className="p-2"
               >
-                <Edit2 className="w-4 h-4" />
+                {monthlyBudget > 0 ? <Edit2 className="w-4 h-4" /> : <Plus className="w-4 h-4" />}
               </Button>
             )}
           </div>
@@ -97,18 +122,20 @@ const BudgetView = ({ transactions, monthlyBudget, onUpdateBudget }: BudgetViewP
           {isEditingBudget ? (
             <div className="space-y-3">
               <div className="flex space-x-2">
-                <Input
-                  type="number"
-                  value={budgetInput}
-                  onChange={(e) => setBudgetInput(e.target.value)}
-                  placeholder="Masukkan jumlah anggaran"
-                  className="glass"
-                  step="10000"
-                />
+                <div className="relative flex-1">
+                  <span className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground font-medium">Rp</span>
+                  <Input
+                    type="text"
+                    value={displayBudget}
+                    onChange={(e) => handleBudgetInputChange(e.target.value)}
+                    placeholder="Masukkan jumlah anggaran"
+                    className="pl-10 glass text-lg h-12"
+                  />
+                </div>
                 <Button
                   onClick={handleBudgetSave}
                   size="sm"
-                  className="px-3 bg-primary hover:bg-primary/90"
+                  className="px-4 bg-primary hover:bg-primary/90 h-12"
                 >
                   <Check className="w-4 h-4" />
                 </Button>
@@ -116,7 +143,7 @@ const BudgetView = ({ transactions, monthlyBudget, onUpdateBudget }: BudgetViewP
                   onClick={handleBudgetCancel}
                   variant="ghost"
                   size="sm"
-                  className="px-3"
+                  className="px-4 h-12"
                 >
                   <X className="w-4 h-4" />
                 </Button>
@@ -124,29 +151,39 @@ const BudgetView = ({ transactions, monthlyBudget, onUpdateBudget }: BudgetViewP
             </div>
           ) : (
             <div className="text-center space-y-2">
-              <p className="text-3xl font-bold text-accent">
-                Rp{monthlyBudget.toLocaleString('id-ID')}
-              </p>
-              {monthlyBudget > 0 && (
-                <p className={`text-sm ${budgetRemaining >= 0 ? 'text-income' : 'text-expense'}`}>
-                  Rp{Math.abs(budgetRemaining).toLocaleString('id-ID')} {budgetRemaining >= 0 ? 'tersisa' : 'melebihi anggaran'}
-                </p>
+              {monthlyBudget > 0 ? (
+                <>
+                  <p className="text-3xl font-bold text-accent">
+                    Rp{formatCurrency(monthlyBudget)}
+                  </p>
+                  <p className={`text-sm ${budgetRemaining >= 0 ? 'text-income' : 'text-expense'}`}>
+                    Rp{formatCurrency(Math.abs(budgetRemaining))} {budgetRemaining >= 0 ? 'tersisa' : 'melebihi anggaran'}
+                  </p>
+                </>
+              ) : (
+                <div className="py-8 text-center">
+                  <div className="w-16 h-16 rounded-full bg-muted/30 flex items-center justify-center mx-auto mb-4">
+                    <Target className="w-8 h-8 opacity-50" />
+                  </div>
+                  <p className="font-medium text-muted-foreground">Belum ada anggaran</p>
+                  <p className="text-sm text-muted-foreground mt-1">Klik tombol + untuk menambahkan anggaran bulanan</p>
+                </div>
               )}
             </div>
           )}
         </div>
       </Card>
 
-      {/* Budget Progress */}
+      {/* Budget Progress - Only show if budget is set */}
       {monthlyBudget > 0 && (
         <Card className="glass p-6">
           <div className="space-y-4">
-            <h3 className="font-medium">Budget Progress</h3>
+            <h3 className="font-medium">Progress Anggaran</h3>
             
             <div className="space-y-3">
               <div className="flex justify-between text-sm">
-                <span>Terpakai: Rp{totalExpenses.toLocaleString('id-ID')}</span>
-                <span>Anggaran: Rp{monthlyBudget.toLocaleString('id-ID')}</span>
+                <span>Terpakai: Rp{formatCurrency(totalExpenses)}</span>
+                <span>Anggaran: Rp{formatCurrency(monthlyBudget)}</span>
               </div>
               
               <div className="w-full bg-muted/30 rounded-full h-3">
@@ -172,7 +209,7 @@ const BudgetView = ({ transactions, monthlyBudget, onUpdateBudget }: BudgetViewP
                 }`}>
                   {budgetUsedPercentage.toFixed(1)}%
                 </p>
-                <p className="text-xs text-muted-foreground">of budget used</p>
+                <p className="text-xs text-muted-foreground">dari anggaran terpakai</p>
               </div>
             </div>
 
@@ -187,13 +224,13 @@ const BudgetView = ({ transactions, monthlyBudget, onUpdateBudget }: BudgetViewP
                   <span className={`text-sm font-medium ${
                     budgetUsedPercentage > 100 ? 'text-expense' : 'text-yellow-500'
                   }`}>
-                    {budgetUsedPercentage > 100 ? 'Budget Exceeded!' : 'Budget Warning!'}
+                    {budgetUsedPercentage > 100 ? 'Anggaran Terlampaui!' : 'Peringatan Anggaran!'}
                   </span>
                 </div>
                 <p className="text-xs text-muted-foreground mt-1">
                   {budgetUsedPercentage > 100 
-                    ? 'You have exceeded your monthly budget.'
-                    : 'You are close to exceeding your monthly budget.'
+                    ? 'Anda telah melampaui anggaran bulanan.'
+                    : 'Anda hampir melampaui anggaran bulanan.'
                   }
                 </p>
               </div>
@@ -202,11 +239,11 @@ const BudgetView = ({ transactions, monthlyBudget, onUpdateBudget }: BudgetViewP
         </Card>
       )}
 
-      {/* Category Breakdown */}
+      {/* Category Breakdown - Only show if there are expenses */}
       {sortedCategories.length > 0 && (
         <Card className="glass p-6">
           <div className="space-y-4">
-            <h3 className="font-medium">Top Spending Categories</h3>
+            <h3 className="font-medium">Kategori Pengeluaran Teratas</h3>
             
             <div className="space-y-3">
               {sortedCategories.map(([category, amount]) => {
@@ -216,7 +253,7 @@ const BudgetView = ({ transactions, monthlyBudget, onUpdateBudget }: BudgetViewP
                   <div key={category} className="space-y-2">
                     <div className="flex justify-between items-center">
                       <span className="text-sm font-medium">{category}</span>
-                      <span className="text-sm text-expense">Rp{amount.toLocaleString('id-ID')}</span>
+                      <span className="text-sm text-expense">Rp{formatCurrency(amount)}</span>
                     </div>
                     <div className="w-full bg-muted/30 rounded-full h-2">
                       <div
@@ -225,7 +262,7 @@ const BudgetView = ({ transactions, monthlyBudget, onUpdateBudget }: BudgetViewP
                       ></div>
                     </div>
                     <p className="text-xs text-muted-foreground">
-                      {percentage.toFixed(1)}% of total expenses
+                      {percentage.toFixed(1)}% dari total pengeluaran
                     </p>
                   </div>
                 );
@@ -238,15 +275,15 @@ const BudgetView = ({ transactions, monthlyBudget, onUpdateBudget }: BudgetViewP
       {/* Budget Tips */}
       <Card className="glass p-6">
         <div className="space-y-4">
-          <h3 className="font-medium">Budget Tips</h3>
+          <h3 className="font-medium">Tips Mengelola Anggaran</h3>
           <div className="space-y-3">
             <div className="flex items-start space-x-3">
               <div className="w-6 h-6 rounded-full savings-gradient flex items-center justify-center flex-shrink-0 mt-0.5">
                 <TrendingDown className="w-3 h-3 text-white" />
               </div>
               <div>
-                <p className="text-sm font-medium">Track daily expenses</p>
-                <p className="text-xs text-muted-foreground">Record every transaction to stay aware of your spending habits</p>
+                <p className="text-sm font-medium">Catat setiap pengeluaran</p>
+                <p className="text-xs text-muted-foreground">Rekam setiap transaksi untuk memahami pola pengeluaran Anda</p>
               </div>
             </div>
             <div className="flex items-start space-x-3">
@@ -254,8 +291,8 @@ const BudgetView = ({ transactions, monthlyBudget, onUpdateBudget }: BudgetViewP
                 <Target className="w-3 h-3 text-white" />
               </div>
               <div>
-                <p className="text-sm font-medium">Set realistic goals</p>
-                <p className="text-xs text-muted-foreground">Create achievable budget targets based on your income</p>
+                <p className="text-sm font-medium">Tetapkan target realistis</p>
+                <p className="text-xs text-muted-foreground">Buat target anggaran yang dapat dicapai berdasarkan pendapatan Anda</p>
               </div>
             </div>
           </div>
