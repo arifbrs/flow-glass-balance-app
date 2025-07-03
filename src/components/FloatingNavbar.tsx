@@ -33,8 +33,8 @@ const FloatingNavbar = ({ activeTab, onTabChange }: FloatingNavbarProps) => {
           className="fixed inset-0 bg-black/30 backdrop-blur-sm z-40 animate-in fade-in-0 duration-200" 
           onClick={() => setIsAddMenuOpen(false)}
         >
-          <div className="fixed bottom-32 left-1/2 transform -translate-x-1/2 animate-in slide-in-from-bottom-4 duration-300 ease-out">
-            {/* FIXED: Perfect spacing, padding, and layout */}
+          <div className="fixed bottom-32 left-1/2 transform -translate-x-1/2">
+            {/* FIXED: Removed slide animation, kept perfect spacing and layout */}
             <div className="bg-white/95 dark:bg-slate-800/95 backdrop-blur-lg border border-gray-200/50 dark:border-gray-700/50 rounded-3xl p-5 space-y-4 w-64 shadow-2xl">
               {/* Add Income Button - Perfect spacing */}
               <button
