@@ -64,45 +64,73 @@ const FloatingNavbar = ({ activeTab, onTabChange }: FloatingNavbarProps) => {
         </div>
       )}
 
-      {/* Bottom Navigation - FIXED: Perfect spacing and icon sizes */}
+      {/* Bottom Navigation - FIXED: Perfect center layout */}
       <div className="fixed bottom-0 left-0 right-0 z-50 p-4">
-        <div className="max-w-md mx-auto">
-          <div className="bg-white/95 dark:bg-slate-900/95 backdrop-blur-lg border border-gray-200 dark:border-gray-700 rounded-2xl px-6 py-4 shadow-xl">
-            <div className="flex items-center justify-between">
-              {navItems.map((item, index) => {
-                const Icon = item.icon;
-                const isActive = activeTab === item.id;
-                
-                return (
-                  <div key={item.id} className="flex items-center">
-                    <button
-                      onClick={() => onTabChange(item.id)}
-                      className={`relative px-3 py-2 rounded-xl transition-all duration-200 flex flex-col items-center space-y-1 min-w-[64px] ${
-                        isActive 
-                          ? 'text-blue-600 dark:text-blue-400 bg-blue-50 dark:bg-blue-950/50' 
-                          : 'text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-gray-800'
-                      }`}
-                    >
-                      <Icon className={`w-6 h-6 ${isActive ? 'scale-110' : ''} transition-transform duration-200`} />
-                      <span className="text-xs font-medium">
-                        {item.label}
-                      </span>
-                    </button>
-                    
-                    {/* Add button - Perfect spacing between Budget and Calendar */}
-                    {index === 1 && (
-                      <div className="mx-4">
-                        <button
-                          onClick={handleAddClick}
-                          className="p-3 rounded-full bg-blue-600 dark:bg-blue-500 text-white shadow-lg hover:bg-blue-700 dark:hover:bg-blue-600 transition-all duration-200 hover:scale-105 active:scale-95"
-                        >
-                          <Plus className={`w-6 h-6 text-white transition-transform duration-200 ${isAddMenuOpen ? 'rotate-45' : ''}`} />
-                        </button>
-                      </div>
-                    )}
-                  </div>
-                );
-              })}
+        <div className="max-w-sm mx-auto">
+          <div className="bg-white/95 dark:bg-slate-900/95 backdrop-blur-lg border border-gray-200 dark:border-gray-700 rounded-2xl px-4 py-3 shadow-xl">
+            {/* FIXED: Grid layout for perfect spacing */}
+            <div className="grid grid-cols-5 items-center gap-2">
+              {/* Home */}
+              <button
+                onClick={() => onTabChange('home')}
+                className={`relative p-2 rounded-xl transition-all duration-200 flex flex-col items-center space-y-1 ${
+                  activeTab === 'home'
+                    ? 'text-blue-600 dark:text-blue-400 bg-blue-50 dark:bg-blue-950/50' 
+                    : 'text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-gray-800'
+                }`}
+              >
+                <Home className={`w-5 h-5 ${activeTab === 'home' ? 'scale-110' : ''} transition-transform duration-200`} />
+                <span className="text-xs font-medium">Home</span>
+              </button>
+
+              {/* Budget */}
+              <button
+                onClick={() => onTabChange('budget')}
+                className={`relative p-2 rounded-xl transition-all duration-200 flex flex-col items-center space-y-1 ${
+                  activeTab === 'budget'
+                    ? 'text-blue-600 dark:text-blue-400 bg-blue-50 dark:bg-blue-950/50' 
+                    : 'text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-gray-800'
+                }`}
+              >
+                <PieChart className={`w-5 h-5 ${activeTab === 'budget' ? 'scale-110' : ''} transition-transform duration-200`} />
+                <span className="text-xs font-medium">Budget</span>
+              </button>
+
+              {/* Add Button - CENTER POSITION */}
+              <div className="flex justify-center">
+                <button
+                  onClick={handleAddClick}
+                  className="p-3 rounded-full bg-blue-600 dark:bg-blue-500 text-white shadow-lg hover:bg-blue-700 dark:hover:bg-blue-600 transition-all duration-200 hover:scale-105 active:scale-95"
+                >
+                  <Plus className={`w-5 h-5 text-white transition-transform duration-200 ${isAddMenuOpen ? 'rotate-45' : ''}`} />
+                </button>
+              </div>
+
+              {/* Calendar */}
+              <button
+                onClick={() => onTabChange('calendar')}
+                className={`relative p-2 rounded-xl transition-all duration-200 flex flex-col items-center space-y-1 ${
+                  activeTab === 'calendar'
+                    ? 'text-blue-600 dark:text-blue-400 bg-blue-50 dark:bg-blue-950/50' 
+                    : 'text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-gray-800'
+                }`}
+              >
+                <Calendar className={`w-5 h-5 ${activeTab === 'calendar' ? 'scale-110' : ''} transition-transform duration-200`} />
+                <span className="text-xs font-medium">Calendar</span>
+              </button>
+
+              {/* Settings */}
+              <button
+                onClick={() => onTabChange('settings')}
+                className={`relative p-2 rounded-xl transition-all duration-200 flex flex-col items-center space-y-1 ${
+                  activeTab === 'settings'
+                    ? 'text-blue-600 dark:text-blue-400 bg-blue-50 dark:bg-blue-950/50' 
+                    : 'text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-gray-800'
+                }`}
+              >
+                <Settings className={`w-5 h-5 ${activeTab === 'settings' ? 'scale-110' : ''} transition-transform duration-200`} />
+                <span className="text-xs font-medium">Settings</span>
+              </button>
             </div>
           </div>
         </div>
