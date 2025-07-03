@@ -33,8 +33,8 @@ const FloatingNavbar = ({ activeTab, onTabChange }: FloatingNavbarProps) => {
           className="fixed inset-0 bg-black/20 backdrop-blur-sm z-40" 
           onClick={() => setIsAddMenuOpen(false)}
         >
-          <div className="fixed bottom-20 left-1/2 transform -translate-x-1/2 slide-up">
-            <div className="bg-card border border-border rounded-2xl p-3 space-y-2 min-w-[200px] threads-shadow">
+          <div className="fixed bottom-24 left-1/2 transform -translate-x-1/2 slide-up">
+            <div className="bg-card border border-border rounded-2xl p-3 space-y-2 min-w-[200px] shadow-lg">
               <button
                 onClick={() => {
                   onTabChange('add-income');
@@ -64,47 +64,46 @@ const FloatingNavbar = ({ activeTab, onTabChange }: FloatingNavbarProps) => {
         </div>
       )}
 
-      {/* Bottom Navigation - Threads Style */}
-      <div className="fixed bottom-0 left-0 right-0 z-50 bg-background/95 backdrop-blur-lg border-t border-border">
-        <div className="max-w-md mx-auto px-4 py-2">
-          <div className="flex items-center justify-between">
-            {navItems.map((item, index) => {
-              const Icon = item.icon;
-              const isActive = activeTab === item.id;
-              
-              return (
-                <div key={item.id} className="flex items-center">
-                  <button
-                    onClick={() => onTabChange(item.id)}
-                    className={`relative p-3 rounded-xl transition-all duration-200 flex flex-col items-center space-y-1 min-w-[50px] ${
-                      isActive 
-                        ? 'text-primary' 
-                        : 'text-muted-foreground hover:text-foreground'
-                    }`}
-                  >
-                    <Icon className={`w-5 h-5 ${isActive ? 'scale-110' : ''} transition-transform duration-200`} />
-                    <span className="text-xs font-medium">
-                      {item.label}
-                    </span>
-                    {isActive && (
-                      <div className="absolute -top-1 left-1/2 transform -translate-x-1/2 w-1 h-1 bg-primary rounded-full"></div>
+      {/* Bottom Navigation */}
+      <div className="fixed bottom-0 left-0 right-0 z-50">
+        <div className="max-w-md mx-auto px-4 pb-4">
+          <div className="bg-card/95 backdrop-blur-lg border border-border rounded-2xl p-2 shadow-lg">
+            <div className="flex items-center justify-between">
+              {navItems.map((item, index) => {
+                const Icon = item.icon;
+                const isActive = activeTab === item.id;
+                
+                return (
+                  <div key={item.id} className="flex items-center">
+                    <button
+                      onClick={() => onTabChange(item.id)}
+                      className={`relative p-3 rounded-xl transition-all duration-200 flex flex-col items-center space-y-1 min-w-[50px] ${
+                        isActive 
+                          ? 'text-primary bg-primary/10' 
+                          : 'text-muted-foreground hover:text-foreground hover:bg-muted/50'
+                      }`}
+                    >
+                      <Icon className={`w-5 h-5 ${isActive ? 'scale-110' : ''} transition-transform duration-200`} />
+                      <span className="text-xs font-medium">
+                        {item.label}
+                      </span>
+                    </button>
+                    
+                    {/* Add button */}
+                    {index === 1 && (
+                      <div className="mx-2">
+                        <button
+                          onClick={handleAddClick}
+                          className="p-3 rounded-full bg-primary text-primary-foreground shadow-lg hover:bg-primary/90 transition-all duration-200 hover:scale-105"
+                        >
+                          <Plus className={`w-5 h-5 transition-transform duration-200 ${isAddMenuOpen ? 'rotate-45' : ''}`} />
+                        </button>
+                      </div>
                     )}
-                  </button>
-                  
-                  {/* Add button */}
-                  {index === 1 && (
-                    <div className="mx-3">
-                      <button
-                        onClick={handleAddClick}
-                        className="p-3 rounded-full bg-primary text-primary-foreground shadow-lg hover:bg-primary/90 transition-all duration-200 hover:scale-105"
-                      >
-                        <Plus className={`w-5 h-5 transition-transform duration-200 ${isAddMenuOpen ? 'rotate-45' : ''}`} />
-                      </button>
-                    </div>
-                  )}
-                </div>
-              );
-            })}
+                  </div>
+                );
+              })}
+            </div>
           </div>
         </div>
       </div>

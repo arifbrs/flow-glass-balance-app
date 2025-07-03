@@ -65,9 +65,9 @@ const Dashboard = ({ transactions, monthlyBudget, onDeleteTransaction }: Dashboa
   };
 
   return (
-    <div className="min-h-screen bg-background threads-text">
+    <div className="min-h-screen bg-background">
       {/* Header */}
-      <div className="sticky top-0 bg-background/80 backdrop-blur-lg border-b border-border z-10">
+      <div className="sticky top-0 bg-background/95 backdrop-blur-lg border-b border-border z-10">
         <div className="max-w-md mx-auto px-4 py-4">
           <div className="flex items-center justify-between">
             <div>
@@ -88,30 +88,33 @@ const Dashboard = ({ transactions, monthlyBudget, onDeleteTransaction }: Dashboa
         <div className="py-4">
           <div className="overflow-hidden">
             <div key={currentMessageIndex} className="fade-in">
-              <p className="text-sm text-muted-foreground text-center leading-relaxed">
+              <p className="text-sm text-muted-foreground text-center leading-relaxed px-2">
                 {motivationalMessages[currentMessageIndex]}
               </p>
             </div>
           </div>
         </div>
 
-        {/* Balance Card - Threads Style */}
-        <div className="threads-card threads-shadow">
+        {/* Balance Card */}
+        <div className="bg-gradient-to-br from-primary/5 to-primary/10 rounded-2xl p-6 border border-primary/20">
           <div className="text-center space-y-3">
             <p className="text-sm text-muted-foreground font-medium">Total Balance</p>
-            <div className="space-y-1">
+            <div className="space-y-2">
               <p className={`text-3xl font-bold ${balance >= 0 ? 'text-green-600' : 'text-red-600'}`}>
                 Rp{formatCurrency(Math.abs(balance))}
               </p>
-              <div className="flex items-center justify-center space-x-1">
+              <div className="flex items-center justify-center space-x-2">
                 {balance >= 0 ? (
-                  <TrendingUp className="w-4 h-4 text-green-600" />
+                  <div className="flex items-center space-x-1 text-green-600">
+                    <TrendingUp className="w-4 h-4" />
+                    <span className="text-sm font-medium">Surplus</span>
+                  </div>
                 ) : (
-                  <TrendingDown className="w-4 h-4 text-red-600" />
+                  <div className="flex items-center space-x-1 text-red-600">
+                    <TrendingDown className="w-4 h-4" />
+                    <span className="text-sm font-medium">Deficit</span>
+                  </div>
                 )}
-                <span className={`text-sm ${balance >= 0 ? 'text-green-600' : 'text-red-600'}`}>
-                  {balance >= 0 ? 'Surplus' : 'Deficit'}
-                </span>
               </div>
             </div>
           </div>
@@ -119,13 +122,13 @@ const Dashboard = ({ transactions, monthlyBudget, onDeleteTransaction }: Dashboa
 
         {/* Stats Row */}
         <div className="grid grid-cols-2 gap-4">
-          <div className="threads-card">
-            <div className="space-y-2">
+          <div className="bg-card rounded-xl p-4 border border-border">
+            <div className="space-y-3">
               <div className="flex items-center space-x-2">
                 <div className="w-8 h-8 rounded-full bg-green-100 dark:bg-green-950 flex items-center justify-center">
                   <TrendingUp className="w-4 h-4 text-green-600" />
                 </div>
-                <span className="text-sm text-muted-foreground">Income</span>
+                <span className="text-sm text-muted-foreground font-medium">Income</span>
               </div>
               <p className="text-lg font-semibold text-green-600">
                 Rp{formatCurrency(totalIncome)}
@@ -133,13 +136,13 @@ const Dashboard = ({ transactions, monthlyBudget, onDeleteTransaction }: Dashboa
             </div>
           </div>
 
-          <div className="threads-card">
-            <div className="space-y-2">
+          <div className="bg-card rounded-xl p-4 border border-border">
+            <div className="space-y-3">
               <div className="flex items-center space-x-2">
                 <div className="w-8 h-8 rounded-full bg-red-100 dark:bg-red-950 flex items-center justify-center">
                   <TrendingDown className="w-4 h-4 text-red-600" />
                 </div>
-                <span className="text-sm text-muted-foreground">Expenses</span>
+                <span className="text-sm text-muted-foreground font-medium">Expenses</span>
               </div>
               <p className="text-lg font-semibold text-red-600">
                 Rp{formatCurrency(totalExpenses)}
@@ -161,8 +164,8 @@ const Dashboard = ({ transactions, monthlyBudget, onDeleteTransaction }: Dashboa
 
           {recentTransactions.length > 0 ? (
             <div className="space-y-3">
-              {recentTransactions.map((transaction, index) => (
-                <div key={transaction.id} className="threads-card group">
+              {recentTransactions.map((transaction) => (
+                <div key={transaction.id} className="bg-card rounded-xl p-4 border border-border hover:border-border/60 transition-colors">
                   <div className="flex items-center justify-between">
                     <div className="flex items-center space-x-3 flex-1 min-w-0">
                       <div className={`w-10 h-10 rounded-full flex items-center justify-center ${
@@ -193,7 +196,9 @@ const Dashboard = ({ transactions, monthlyBudget, onDeleteTransaction }: Dashboa
                         <p className="text-xs text-muted-foreground mt-1">
                           {new Date(transaction.date).toLocaleDateString('id-ID', {
                             day: 'numeric',
-                            month: 'short'
+                            month: 'short',
+                            hour: '2-digit',
+                            minute: '2-digit'
                           })}
                         </p>
                       </div>
@@ -203,7 +208,7 @@ const Dashboard = ({ transactions, monthlyBudget, onDeleteTransaction }: Dashboa
               ))}
             </div>
           ) : (
-            <div className="threads-card text-center py-12">
+            <div className="bg-card rounded-xl p-8 border border-border text-center">
               <div className="w-16 h-16 rounded-full bg-muted flex items-center justify-center mx-auto mb-4">
                 <Wallet className="w-8 h-8 text-muted-foreground" />
               </div>

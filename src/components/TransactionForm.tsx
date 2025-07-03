@@ -71,9 +71,9 @@ const TransactionForm = ({ type, onClose, onSubmit }: TransactionFormProps) => {
   };
 
   return (
-    <div className="min-h-screen bg-background threads-text">
+    <div className="min-h-screen bg-background">
       {/* Header */}
-      <div className="sticky top-0 bg-background/80 backdrop-blur-lg border-b border-border z-10">
+      <div className="sticky top-0 bg-background/95 backdrop-blur-lg border-b border-border z-10">
         <div className="max-w-md mx-auto px-4 py-4">
           <div className="flex items-center space-x-4">
             <button
@@ -104,7 +104,7 @@ const TransactionForm = ({ type, onClose, onSubmit }: TransactionFormProps) => {
                     value={description}
                     onChange={(e) => setDescription(e.target.value)}
                     placeholder="e.g., Monthly salary, Freelance work"
-                    className="threads-input mt-2"
+                    className="mt-2 rounded-xl border-border"
                   />
                 </div>
 
@@ -122,7 +122,7 @@ const TransactionForm = ({ type, onClose, onSubmit }: TransactionFormProps) => {
                       value={displayAmount}
                       onChange={(e) => handleAmountChange(e.target.value)}
                       placeholder="0"
-                      className="pl-10 threads-input text-lg font-semibold"
+                      className="pl-10 rounded-xl border-border text-lg font-semibold"
                     />
                   </div>
                 </div>
@@ -133,13 +133,13 @@ const TransactionForm = ({ type, onClose, onSubmit }: TransactionFormProps) => {
                     <PopoverTrigger asChild>
                       <Button
                         variant="outline"
-                        className="w-full justify-start text-left font-normal threads-input mt-2 border-0"
+                        className="w-full justify-start text-left font-normal mt-2 rounded-xl border-border"
                       >
                         <Calendar className="mr-2 h-4 w-4" />
                         {date ? format(date, 'dd MMMM yyyy', { locale: id }) : 'Select date'}
                       </Button>
                     </PopoverTrigger>
-                    <PopoverContent className="w-auto p-0 bg-card border border-border" align="start">
+                    <PopoverContent className="w-auto p-0 bg-card border border-border rounded-xl" align="start">
                       <CalendarComponent
                         mode="single"
                         selected={date}
@@ -164,7 +164,7 @@ const TransactionForm = ({ type, onClose, onSubmit }: TransactionFormProps) => {
                     value={category}
                     onChange={(e) => setCategory(e.target.value)}
                     placeholder="e.g., Salary, Freelance, Investment"
-                    className="threads-input mt-2"
+                    className="mt-2 rounded-xl border-border"
                   />
                 </div>
               </div>
@@ -175,8 +175,8 @@ const TransactionForm = ({ type, onClose, onSubmit }: TransactionFormProps) => {
               <div className="text-center space-y-4">
                 <div>
                   <Label className="text-sm font-medium text-muted-foreground">Amount</Label>
-                  <div className="threads-card mt-2 p-6">
-                    <div className="text-2xl font-bold text-red-600">
+                  <div className="bg-card rounded-2xl p-6 mt-2 border border-border">
+                    <div className="text-3xl font-bold text-red-600">
                       Rp{displayAmount}
                     </div>
                   </div>
@@ -229,7 +229,7 @@ const TransactionForm = ({ type, onClose, onSubmit }: TransactionFormProps) => {
                     value={description}
                     onChange={(e) => setDescription(e.target.value)}
                     placeholder="What did you spend on?"
-                    className="threads-input mt-2 resize-none"
+                    className="mt-2 rounded-xl border-border resize-none"
                     rows={3}
                   />
                 </div>
@@ -243,7 +243,7 @@ const TransactionForm = ({ type, onClose, onSubmit }: TransactionFormProps) => {
                     value={category}
                     onChange={(e) => setCategory(e.target.value)}
                     placeholder="e.g., Food, Transport, Shopping"
-                    className="threads-input mt-2"
+                    className="mt-2 rounded-xl border-border"
                   />
                 </div>
 
@@ -253,13 +253,13 @@ const TransactionForm = ({ type, onClose, onSubmit }: TransactionFormProps) => {
                     <PopoverTrigger asChild>
                       <Button
                         variant="outline"
-                        className="w-full justify-start text-left font-normal threads-input mt-2 border-0"
+                        className="w-full justify-start text-left font-normal mt-2 rounded-xl border-border"
                       >
                         <Calendar className="mr-2 h-4 w-4" />
                         {date ? format(date, 'dd MMMM yyyy', { locale: id }) : 'Select date'}
                       </Button>
                     </PopoverTrigger>
-                    <PopoverContent className="w-auto p-0 bg-card border border-border" align="start">
+                    <PopoverContent className="w-auto p-0 bg-card border border-border rounded-xl" align="start">
                       <CalendarComponent
                         mode="single"
                         selected={date}
@@ -282,7 +282,7 @@ const TransactionForm = ({ type, onClose, onSubmit }: TransactionFormProps) => {
           <div className="pt-6">
             <Button
               type="submit"
-              className={`w-full py-3 font-semibold rounded-full ${
+              className={`w-full py-3 font-semibold rounded-2xl ${
                 type === 'income' 
                   ? 'bg-green-600 hover:bg-green-700 text-white' 
                   : 'bg-red-600 hover:bg-red-700 text-white'
