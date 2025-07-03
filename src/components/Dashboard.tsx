@@ -56,14 +56,70 @@ const Dashboard = ({ transactions, monthlyBudget, onDeleteTransaction }: Dashboa
       <div className="max-w-md mx-auto px-6 pb-32 space-y-6">
         {/* REMOVED: Motivational Message div */}
 
-        {/* Balance Card - Improved design */}
-        <div className="bg-gradient-to-br from-blue-50 to-blue-100 dark:from-blue-950 dark:to-blue-900 rounded-2xl p-6 border border-blue-200 dark:border-blue-800 mt-6">
-          <div className="text-center space-y-4">
-            <p className="text-sm text-gray-600 dark:text-gray-400 font-medium">Total Balance</p>
-            <div className="space-y-2">
-              <p className={`text-4xl font-bold ${balance >= 0 ? 'text-green-600 dark:text-green-400' : 'text-red-600 dark:text-red-400'}`}>
-                Rp{formatCurrency(Math.abs(balance))}
-              </p>
+        {/* Balance Card - Modern dark design like the screenshot */}
+        <div className="bg-gradient-to-br from-gray-900 to-black dark:from-gray-800 dark:to-gray-900 rounded-3xl p-8 border border-gray-800 dark:border-gray-700 mt-6 shadow-2xl">
+          <div className="space-y-6">
+            {/* Header with greeting and profile */}
+            <div className="flex items-center justify-between">
+              <div>
+                <h2 className="text-white text-2xl font-bold">Hello, User</h2>
+                <p className="text-gray-400 text-sm mt-1">Welcome back</p>
+              </div>
+              <div className="w-12 h-12 rounded-2xl bg-gray-700 flex items-center justify-center">
+                <div className="w-8 h-8 rounded-xl bg-gray-500"></div>
+              </div>
+            </div>
+
+            {/* Tab indicators */}
+            <div className="flex space-x-8">
+              <div className="flex flex-col items-center">
+                <span className="text-white text-sm font-medium">Hub</span>
+                <div className="w-8 h-0.5 bg-white mt-2 rounded-full"></div>
+              </div>
+              <div className="flex flex-col items-center">
+                <span className="text-gray-400 text-sm">Cash</span>
+                <div className="w-8 h-0.5 bg-transparent mt-2"></div>
+              </div>
+              <div className="flex flex-col items-center">
+                <span className="text-gray-400 text-sm">Crypto</span>
+                <div className="w-8 h-0.5 bg-transparent mt-2"></div>
+              </div>
+            </div>
+
+            {/* Main balance section */}
+            <div className="bg-gray-800/50 rounded-2xl p-6 border border-gray-700/50">
+              <div className="flex items-center justify-between mb-2">
+                <span className="text-gray-400 text-sm">All accounts • Total balance</span>
+                <span className="text-gray-400 text-xs">UST ↗</span>
+              </div>
+              <div className="flex items-baseline space-x-1">
+                <span className="text-white text-4xl font-bold">
+                  Rp{formatCurrency(Math.abs(balance))}
+                </span>
+                <span className="text-gray-400 text-lg">.00</span>
+              </div>
+            </div>
+
+            {/* Action buttons */}
+            <div className="flex justify-between pt-2">
+              <div className="flex flex-col items-center space-y-2">
+                <div className="w-12 h-12 rounded-2xl bg-gray-700 flex items-center justify-center">
+                  <TrendingDown className="w-6 h-6 text-gray-300" />
+                </div>
+                <span className="text-gray-400 text-xs">Deposit</span>
+              </div>
+              <div className="flex flex-col items-center space-y-2">
+                <div className="w-12 h-12 rounded-2xl bg-gray-700 flex items-center justify-center">
+                  <TrendingUp className="w-6 h-6 text-gray-300" />
+                </div>
+                <span className="text-gray-400 text-xs">Withdraw</span>
+              </div>
+              <div className="flex flex-col items-center space-y-2">
+                <div className="w-12 h-12 rounded-2xl bg-gray-700 flex items-center justify-center">
+                  <Plus className="w-6 h-6 text-gray-300" />
+                </div>
+                <span className="text-gray-400 text-xs">Transfer</span>
+              </div>
             </div>
           </div>
         </div>
