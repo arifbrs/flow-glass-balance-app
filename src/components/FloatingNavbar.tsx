@@ -64,10 +64,10 @@ const FloatingNavbar = ({ activeTab, onTabChange }: FloatingNavbarProps) => {
         </div>
       )}
 
-      {/* Bottom Navigation - Fixed positioning and spacing */}
+      {/* Bottom Navigation - FIXED: Perfect spacing and icon sizes */}
       <div className="fixed bottom-0 left-0 right-0 z-50 p-4">
         <div className="max-w-md mx-auto">
-          <div className="bg-white/95 dark:bg-slate-900/95 backdrop-blur-lg border border-gray-200 dark:border-gray-700 rounded-2xl px-4 py-3 shadow-xl">
+          <div className="bg-white/95 dark:bg-slate-900/95 backdrop-blur-lg border border-gray-200 dark:border-gray-700 rounded-2xl px-6 py-4 shadow-xl">
             <div className="flex items-center justify-between">
               {navItems.map((item, index) => {
                 const Icon = item.icon;
@@ -77,24 +77,24 @@ const FloatingNavbar = ({ activeTab, onTabChange }: FloatingNavbarProps) => {
                   <div key={item.id} className="flex items-center">
                     <button
                       onClick={() => onTabChange(item.id)}
-                      className={`relative px-4 py-3 rounded-xl transition-all duration-200 flex flex-col items-center space-y-1 min-w-[60px] ${
+                      className={`relative px-3 py-2 rounded-xl transition-all duration-200 flex flex-col items-center space-y-1 min-w-[64px] ${
                         isActive 
                           ? 'text-blue-600 dark:text-blue-400 bg-blue-50 dark:bg-blue-950/50' 
                           : 'text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-gray-800'
                       }`}
                     >
-                      <Icon className={`w-5 h-5 ${isActive ? 'scale-110' : ''} transition-transform duration-200`} />
+                      <Icon className={`w-6 h-6 ${isActive ? 'scale-110' : ''} transition-transform duration-200`} />
                       <span className="text-xs font-medium">
                         {item.label}
                       </span>
                     </button>
                     
-                    {/* Add button - Better positioning */}
+                    {/* Add button - Perfect spacing between Budget and Calendar */}
                     {index === 1 && (
-                      <div className="mx-3">
+                      <div className="mx-4">
                         <button
                           onClick={handleAddClick}
-                          className="p-4 rounded-full bg-blue-600 dark:bg-blue-500 text-white shadow-lg hover:bg-blue-700 dark:hover:bg-blue-600 transition-all duration-200 hover:scale-105 active:scale-95"
+                          className="p-3 rounded-full bg-blue-600 dark:bg-blue-500 text-white shadow-lg hover:bg-blue-700 dark:hover:bg-blue-600 transition-all duration-200 hover:scale-105 active:scale-95"
                         >
                           <Plus className={`w-6 h-6 text-white transition-transform duration-200 ${isAddMenuOpen ? 'rotate-45' : ''}`} />
                         </button>
