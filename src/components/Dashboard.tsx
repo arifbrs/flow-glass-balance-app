@@ -19,31 +19,37 @@ interface DashboardProps {
 }
 
 const Dashboard = ({ transactions, monthlyBudget, onDeleteTransaction }: DashboardProps) => {
-  const [motivationalText, setMotivationalText] = useState('');
-  const [greeting, setGreeting] = useState('');
+  const [currentMessageIndex, setCurrentMessageIndex] = useState(0);
 
-  const motivationalQuotes = [
-    "Setiap rupiah yang kamu kelola hari ini adalah investasi untuk masa depan yang lebih baik! 💪",
-    "Keuangan yang sehat dimulai dari kebiasaan kecil yang konsisten! 🌟",
-    "Jangan biarkan uang mengendalikan hidupmu, tapi kendalikan uangmu untuk hidup yang lebih baik! 💰",
-    "Setiap pengeluaran yang bijak adalah langkah menuju kebebasan finansial! 🚀",
-    "Budgeting bukan tentang membatasi, tapi tentang memberikan kebebasan pada masa depanmu! ✨",
-    "Mulai hari ini dengan keputusan finansial yang cerdas! 🎯",
-    "Kekayaan sejati bukan dari berapa yang kamu hasilkan, tapi berapa yang kamu simpan! 💎"
+  const motivationalMessages = [
+    "Selamat Pagi! Setiap rupiah yang kamu kelola hari ini adalah investasi untuk masa depan yang lebih baik!",
+    "Selamat Siang! Keuangan yang sehat dimulai dari kebiasaan kecil yang konsisten!",
+    "Selamat Sore! Jangan biarkan uang mengendalikan hidupmu, tapi kendalikan uangmu untuk hidup yang lebih baik!",
+    "Selamat Malam! Setiap pengeluaran yang bijak adalah langkah menuju kebebasan finansial!",
+    "Budgeting bukan tentang membatasi, tapi tentang memberikan kebebasan pada masa depanmu!",
+    "Mulai hari ini dengan keputusan finansial yang cerdas!",
+    "Kekayaan sejati bukan dari berapa yang kamu hasilkan, tapi berapa yang kamu simpan!"
   ];
 
-  const getGreeting = () => {
+  const getTimeBasedMessage = () => {
     const hour = new Date().getHours();
-    if (hour < 12) return "Selamat Pagi! ☀️";
-    if (hour < 15) return "Selamat Siang! 🌤️";
-    if (hour < 18) return "Selamat Sore! 🌅";
-    return "Selamat Malam! 🌙";
+    if (hour < 12) return motivationalMessages[0]; // Morning
+    if (hour < 15) return motivationalMessages[1]; // Afternoon
+    if (hour < 18) return motivationalMessages[2]; // Evening
+    return motivationalMessages[3]; // Night
   };
 
   useEffect(() => {
-    setGreeting(getGreeting());
-    const randomQuote = motivationalQuotes[Math.floor(Math.random() * motivationalQuotes.length)];
-    setMotivationalText(randomQuote);
+    // Start with time-based message
+    const timeBasedIndex = motivationalMessages.findIndex(msg => msg === getTimeBasedMessage());
+    setCurrentMessageIndex(timeBasedIndex);
+
+    // Rotate through all messages every 5 seconds
+    const interval = setInterval(() => {
+      setCurrentMessageIndex((prev) => (prev + 1) % motivationalMessages.length);
+    }, 5000);
+
+    return () => clearInterval(interval);
   }, []);
 
   const currentMonth = new Date().getMonth();
@@ -77,15 +83,15 @@ const Dashboard = ({ transactions, monthlyBudget, onDeleteTransaction }: Dashboa
 
   return (
     <div className="space-y-6 pb-24">
-      {/* Animated Header with Greeting and Motivational Text */}
-      <div className="text-center space-y-3 py-4">
-        <div className="animate-fade-in">
-          <h1 className="text-xl font-bold gradient-text">{greeting}</h1>
-        </div>
-        <div className="overflow-hidden">
-          <div className="animate-slide-text whitespace-nowrap">
-            <p className="text-sm text-muted-foreground inline-block px-4">
-              {motivationalText}
+      {/* Compact Header with Single Rotating Message */}
+      <div className="text-center py-4">
+        <div className="overflow-hidden h-12 flex items-center justify-center">
+          <div 
+            key={currentMessageIndex}
+            className="animate-fade-in px-4"
+          >
+            <p className="text-sm text-muted-foreground leading-relaxed">
+              {motivationalMessages[currentMessageIndex]}
             </p>
           </div>
         </div>
