@@ -2,11 +2,11 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Threads.com Inspired Design System */
+/* Modern Design System with Proper Contrast */
 
 @layer base {
   :root {
-    /* Threads-inspired color palette */
+    /* Light theme - high contrast */
     --background: 248 250 252;
     --foreground: 15 23 42;
 
@@ -14,17 +14,17 @@
     --card: 255 255 255;
     --card-foreground: 15 23 42;
 
-    /* Subtle borders */
+    /* Visible borders */
     --border: 226 232 240;
     --input: 241 245 249;
 
-    /* Primary accent (Threads blue) */
+    /* Primary accent (Blue) */
     --primary: 59 130 246;
     --primary-foreground: 255 255 255;
 
-    /* Muted colors */
+    /* Muted colors with good contrast */
     --muted: 241 245 249;
-    --muted-foreground: 100 116 139;
+    --muted-foreground: 71 85 105;
 
     /* Secondary colors */
     --secondary: 241 245 249;
@@ -34,7 +34,7 @@
     --accent: 241 245 249;
     --accent-foreground: 15 23 42;
 
-    /* Financial colors - subtle and modern */
+    /* Financial colors */
     --income: 34 197 94;
     --expense: 239 68 68;
     --savings: 59 130 246;
@@ -55,13 +55,14 @@
   }
 
   .dark {
+    /* Dark theme - high contrast */
     --background: 2 6 23;
     --foreground: 248 250 252;
 
     --card: 15 23 42;
     --card-foreground: 248 250 252;
 
-    --border: 30 41 59;
+    --border: 51 65 85;
     --input: 30 41 59;
 
     --primary: 59 130 246;
@@ -106,7 +107,7 @@
     font-feature-settings: "rlig" 1, "calt" 1;
   }
 
-  /* Modern typography */
+  /* Modern typography with good contrast */
   .threads-text {
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
     line-height: 1.5;
@@ -114,7 +115,7 @@
 }
 
 @layer components {
-  /* Modern card */
+  /* Modern card with proper contrast */
   .threads-card {
     @apply bg-card border border-border rounded-2xl p-6 transition-all duration-200;
   }
@@ -123,7 +124,7 @@
     @apply border-border/60 shadow-sm;
   }
 
-  /* Modern button */
+  /* Modern button with good contrast */
   .threads-button {
     @apply bg-primary text-primary-foreground rounded-2xl px-6 py-3 font-medium text-sm transition-all duration-200;
   }
@@ -132,7 +133,7 @@
     @apply bg-primary/90 scale-[1.02];
   }
 
-  /* Modern input */
+  /* Modern input with visible borders */
   .threads-input {
     @apply bg-card border border-border rounded-xl px-4 py-3 text-sm placeholder:text-muted-foreground focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all duration-200;
   }
@@ -147,13 +148,13 @@
     box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px 0 rgb(0 0 0 / 0.06);
   }
 
-  /* Income/Expense indicators */
+  /* Income/Expense indicators with good contrast */
   .income-indicator {
-    @apply text-green-600 bg-green-50 dark:bg-green-950 dark:text-green-400;
+    @apply text-green-700 bg-green-50 dark:bg-green-950 dark:text-green-300;
   }
 
   .expense-indicator {
-    @apply text-red-600 bg-red-50 dark:bg-red-950 dark:text-red-400;
+    @apply text-red-700 bg-red-50 dark:bg-red-950 dark:text-red-300;
   }
 
   /* Animations */
@@ -209,7 +210,7 @@
   overflow-x: hidden;
 }
 
-/* Improved focus states */
+/* Improved focus states with high contrast */
 .focus-visible\:ring-2:focus-visible {
   outline: 2px solid transparent;
   outline-offset: 2px;
@@ -228,4 +229,30 @@ button:active {
 /* Smooth transitions for all interactive elements */
 button, input, textarea, select {
   transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* High contrast text colors */
+.text-high-contrast {
+  @apply text-gray-900 dark:text-gray-100;
+}
+
+.text-medium-contrast {
+  @apply text-gray-700 dark:text-gray-300;
+}
+
+.text-low-contrast {
+  @apply text-gray-500 dark:text-gray-400;
+}
+
+/* Icon colors with proper contrast */
+.icon-primary {
+  @apply text-blue-600 dark:text-blue-400;
+}
+
+.icon-secondary {
+  @apply text-gray-600 dark:text-gray-300;
+}
+
+.icon-muted {
+  @apply text-gray-500 dark:text-gray-400;
 }
