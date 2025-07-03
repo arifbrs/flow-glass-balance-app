@@ -101,9 +101,9 @@ const BudgetView = ({ transactions, monthlyBudget, onUpdateBudget }: BudgetViewP
                   type="number"
                   value={budgetInput}
                   onChange={(e) => setBudgetInput(e.target.value)}
-                  placeholder="Enter budget amount"
+                  placeholder="Masukkan jumlah anggaran"
                   className="glass"
-                  step="0.01"
+                  step="10000"
                 />
                 <Button
                   onClick={handleBudgetSave}
@@ -125,11 +125,11 @@ const BudgetView = ({ transactions, monthlyBudget, onUpdateBudget }: BudgetViewP
           ) : (
             <div className="text-center space-y-2">
               <p className="text-3xl font-bold text-accent">
-                ${monthlyBudget.toFixed(2)}
+                Rp{monthlyBudget.toLocaleString('id-ID')}
               </p>
               {monthlyBudget > 0 && (
                 <p className={`text-sm ${budgetRemaining >= 0 ? 'text-income' : 'text-expense'}`}>
-                  ${Math.abs(budgetRemaining).toFixed(2)} {budgetRemaining >= 0 ? 'remaining' : 'over budget'}
+                  Rp{Math.abs(budgetRemaining).toLocaleString('id-ID')} {budgetRemaining >= 0 ? 'tersisa' : 'melebihi anggaran'}
                 </p>
               )}
             </div>
@@ -145,8 +145,8 @@ const BudgetView = ({ transactions, monthlyBudget, onUpdateBudget }: BudgetViewP
             
             <div className="space-y-3">
               <div className="flex justify-between text-sm">
-                <span>Spent: ${totalExpenses.toFixed(2)}</span>
-                <span>Budget: ${monthlyBudget.toFixed(2)}</span>
+                <span>Terpakai: Rp{totalExpenses.toLocaleString('id-ID')}</span>
+                <span>Anggaran: Rp{monthlyBudget.toLocaleString('id-ID')}</span>
               </div>
               
               <div className="w-full bg-muted/30 rounded-full h-3">
@@ -216,7 +216,7 @@ const BudgetView = ({ transactions, monthlyBudget, onUpdateBudget }: BudgetViewP
                   <div key={category} className="space-y-2">
                     <div className="flex justify-between items-center">
                       <span className="text-sm font-medium">{category}</span>
-                      <span className="text-sm text-expense">${amount.toFixed(2)}</span>
+                      <span className="text-sm text-expense">Rp{amount.toLocaleString('id-ID')}</span>
                     </div>
                     <div className="w-full bg-muted/30 rounded-full h-2">
                       <div

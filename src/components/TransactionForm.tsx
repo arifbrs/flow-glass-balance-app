@@ -44,8 +44,8 @@ const TransactionForm = ({ type, onClose, onSubmit }: TransactionFormProps) => {
   };
 
   return (
-    <div className="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-end">
-      <div className="w-full bg-card/95 backdrop-blur-lg rounded-t-3xl p-6 animate-slide-up">
+    <div className="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center p-4">
+      <div className="w-full max-w-md bg-card/95 backdrop-blur-lg rounded-3xl p-6 animate-slide-up max-h-[90vh] overflow-y-auto">
         <div className="flex items-center justify-between mb-6">
           <h2 className={`text-xl font-bold ${type === 'income' ? 'text-income' : 'text-expense'}`}>
             Add {type === 'income' ? 'Income' : 'Expense'}
@@ -69,9 +69,9 @@ const TransactionForm = ({ type, onClose, onSubmit }: TransactionFormProps) => {
                 type="number"
                 value={amount}
                 onChange={(e) => setAmount(e.target.value)}
-                placeholder="0.00"
+                placeholder="0"
                 className="pl-10 glass text-lg"
-                step="0.01"
+                step="1000"
                 required
               />
             </div>

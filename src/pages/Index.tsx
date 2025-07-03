@@ -52,8 +52,8 @@ const Index = () => {
     setTransactions(prev => [newTransaction, ...prev]);
     
     toast({
-      title: "Transaction Added",
-      description: `${transactionData.type === 'income' ? 'Income' : 'Expense'} of $${transactionData.amount} added successfully`,
+      title: "Transaksi Ditambahkan",
+      description: `${transactionData.type === 'income' ? 'Pemasukan' : 'Pengeluaran'} sebesar Rp${transactionData.amount.toLocaleString('id-ID')} berhasil ditambahkan`,
     });
 
     setActiveTab('home');
@@ -62,8 +62,8 @@ const Index = () => {
   const handleUpdateBudget = (budget: number) => {
     setMonthlyBudget(budget);
     toast({
-      title: "Budget Updated",
-      description: `Monthly budget set to $${budget.toFixed(2)}`,
+      title: "Anggaran Diperbarui", 
+      description: `Anggaran bulanan diatur ke Rp${budget.toLocaleString('id-ID')}`,
     });
   };
 

@@ -56,7 +56,7 @@ const Dashboard = ({ transactions, monthlyBudget }: DashboardProps) => {
         <div className="space-y-2">
           <p className="text-muted-foreground text-sm">Current Balance</p>
           <p className={`text-3xl font-bold ${balance >= 0 ? 'text-income' : 'text-expense'}`}>
-            ${balance.toFixed(2)}
+            {balance >= 0 ? '+' : ''}Rp{Math.abs(balance).toLocaleString('id-ID')}
           </p>
           <div className="flex items-center justify-center space-x-1">
             {balance >= 0 ? (
@@ -80,7 +80,7 @@ const Dashboard = ({ transactions, monthlyBudget }: DashboardProps) => {
             </div>
             <div>
               <p className="text-muted-foreground text-xs">Income</p>
-              <p className="font-semibold text-income">${totalIncome.toFixed(2)}</p>
+              <p className="font-semibold text-income">Rp{totalIncome.toLocaleString('id-ID')}</p>
             </div>
           </div>
         </Card>
@@ -92,7 +92,7 @@ const Dashboard = ({ transactions, monthlyBudget }: DashboardProps) => {
             </div>
             <div>
               <p className="text-muted-foreground text-xs">Expenses</p>
-              <p className="font-semibold text-expense">${totalExpenses.toFixed(2)}</p>
+              <p className="font-semibold text-expense">Rp{totalExpenses.toLocaleString('id-ID')}</p>
             </div>
           </div>
         </Card>
@@ -108,14 +108,14 @@ const Dashboard = ({ transactions, monthlyBudget }: DashboardProps) => {
                 <span className="font-medium">Monthly Budget</span>
               </div>
               <span className="text-sm text-muted-foreground">
-                ${budgetRemaining.toFixed(2)} remaining
+                Rp{Math.abs(budgetRemaining).toLocaleString('id-ID')} {budgetRemaining >= 0 ? 'tersisa' : 'melebihi'}
               </span>
             </div>
             
             <div className="space-y-2">
               <div className="flex justify-between text-sm">
-                <span>Used: ${totalExpenses.toFixed(2)}</span>
-                <span>Budget: ${monthlyBudget.toFixed(2)}</span>
+                <span>Terpakai: Rp{totalExpenses.toLocaleString('id-ID')}</span>
+                <span>Anggaran: Rp{monthlyBudget.toLocaleString('id-ID')}</span>
               </div>
               <div className="w-full bg-muted/30 rounded-full h-2">
                 <div
@@ -161,7 +161,7 @@ const Dashboard = ({ transactions, monthlyBudget }: DashboardProps) => {
                       <span className={`font-semibold ${
                         transaction.type === 'income' ? 'text-income' : 'text-expense'
                       }`}>
-                        {transaction.type === 'income' ? '+' : '-'}${transaction.amount.toFixed(2)}
+                        {transaction.type === 'income' ? '+' : '-'}Rp{transaction.amount.toLocaleString('id-ID')}
                       </span>
                     </div>
                     {transaction.description && (
