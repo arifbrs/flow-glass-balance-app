@@ -19,24 +19,6 @@ interface DashboardProps {
 }
 
 const Dashboard = ({ transactions, monthlyBudget, onDeleteTransaction }: DashboardProps) => {
-  const [currentMessageIndex, setCurrentMessageIndex] = useState(0);
-
-  const motivationalMessages = [
-    "Setiap rupiah yang kamu kelola hari ini adalah investasi untuk masa depan yang lebih baik",
-    "Keuangan yang sehat dimulai dari kebiasaan kecil yang konsisten",
-    "Jangan biarkan uang mengendalikan hidupmu, tapi kendalikan uangmu untuk hidup yang lebih baik",
-    "Setiap pengeluaran yang bijak adalah langkah menuju kebebasan finansial",
-    "Budgeting bukan tentang membatasi, tapi tentang memberikan kebebasan pada masa depanmu"
-  ];
-
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setCurrentMessageIndex((prev) => (prev + 1) % motivationalMessages.length);
-    }, 4000);
-
-    return () => clearInterval(interval);
-  }, []);
-
   const currentMonth = new Date().getMonth();
   const currentYear = new Date().getFullYear();
   
@@ -72,26 +54,16 @@ const Dashboard = ({ transactions, monthlyBudget, onDeleteTransaction }: Dashboa
       </div>
 
       <div className="max-w-md mx-auto px-6 pb-32 space-y-6">
-        {/* Motivational Message - Better spacing */}
-        <div className="py-6">
-          <div className="overflow-hidden">
-            <div key={currentMessageIndex} className="fade-in">
-              <p className="text-sm text-gray-600 dark:text-gray-400 text-center leading-relaxed px-4">
-                {motivationalMessages[currentMessageIndex]}
-              </p>
-            </div>
-          </div>
-        </div>
+        {/* REMOVED: Motivational Message div */}
 
         {/* Balance Card - Improved design */}
-        <div className="bg-gradient-to-br from-blue-50 to-blue-100 dark:from-blue-950 dark:to-blue-900 rounded-2xl p-6 border border-blue-200 dark:border-blue-800">
+        <div className="bg-gradient-to-br from-blue-50 to-blue-100 dark:from-blue-950 dark:to-blue-900 rounded-2xl p-6 border border-blue-200 dark:border-blue-800 mt-6">
           <div className="text-center space-y-4">
             <p className="text-sm text-gray-600 dark:text-gray-400 font-medium">Total Balance</p>
             <div className="space-y-2">
               <p className={`text-4xl font-bold ${balance >= 0 ? 'text-green-600 dark:text-green-400' : 'text-red-600 dark:text-red-400'}`}>
                 Rp{formatCurrency(Math.abs(balance))}
               </p>
-              {/* REMOVED: Surplus/Deficit indicator div */}
             </div>
           </div>
         </div>
