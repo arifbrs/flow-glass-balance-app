@@ -2,92 +2,41 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Modern Design System with Perfect Contrast and Spacing */
+/* Dark Crypto Wallet Theme */
 
 @layer base {
   :root {
-    /* Light theme - high contrast colors */
-    --background: 249 250 251;
-    --foreground: 17 24 39;
+    /* Dark theme - crypto wallet style */
+    --background: 0 0 0;
+    --foreground: 255 255 255;
 
-    /* Clean card backgrounds */
-    --card: 255 255 255;
-    --card-foreground: 17 24 39;
+    --card: 17 24 39;
+    --card-foreground: 255 255 255;
 
-    /* Visible borders */
-    --border: 229 231 235;
-    --input: 243 244 246;
+    --border: 55 65 81;
+    --input: 31 41 55;
 
-    /* Primary accent (Blue) */
     --primary: 59 130 246;
     --primary-foreground: 255 255 255;
 
-    /* Muted colors with good contrast */
-    --muted: 243 244 246;
-    --muted-foreground: 75 85 99;
+    --muted: 31 41 55;
+    --muted-foreground: 156 163 175;
 
-    /* Secondary colors */
-    --secondary: 243 244 246;
-    --secondary-foreground: 17 24 39;
+    --secondary: 31 41 55;
+    --secondary-foreground: 255 255 255;
 
-    /* Accent colors */
-    --accent: 243 244 246;
-    --accent-foreground: 17 24 39;
+    --accent: 31 41 55;
+    --accent-foreground: 255 255 255;
 
-    /* Financial colors */
-    --income: 34 197 94;
-    --expense: 239 68 68;
-    --savings: 59 130 246;
-
-    /* Destructive */
     --destructive: 239 68 68;
     --destructive-foreground: 255 255 255;
 
-    /* Ring */
     --ring: 59 130 246;
 
-    /* Popover */
-    --popover: 255 255 255;
-    --popover-foreground: 17 24 39;
+    --popover: 17 24 39;
+    --popover-foreground: 255 255 255;
 
-    /* Radius */
     --radius: 1rem;
-  }
-
-  .dark {
-    /* Dark theme - high contrast colors */
-    --background: 15 23 42;
-    --foreground: 248 250 252;
-
-    --card: 30 41 59;
-    --card-foreground: 248 250 252;
-
-    --border: 51 65 85;
-    --input: 51 65 85;
-
-    --primary: 59 130 246;
-    --primary-foreground: 255 255 255;
-
-    --muted: 51 65 85;
-    --muted-foreground: 148 163 184;
-
-    --secondary: 51 65 85;
-    --secondary-foreground: 248 250 252;
-
-    --accent: 51 65 85;
-    --accent-foreground: 248 250 252;
-
-    --income: 34 197 94;
-    --expense: 239 68 68;
-    --savings: 59 130 246;
-
-    --destructive: 239 68 68;
-    --destructive-foreground: 255 255 255;
-
-    --ring: 59 130 246;
-
-    --popover: 30 41 59;
-    --popover-foreground: 248 250 252;
   }
 }
 
@@ -103,12 +52,12 @@
   }
 
   body {
-    @apply bg-background text-foreground font-sans;
+    @apply bg-black text-white font-sans;
     font-feature-settings: "rlig" 1, "calt" 1;
     line-height: 1.6;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
   }
 
-  /* Modern typography with perfect contrast */
   h1, h2, h3, h4, h5, h6 {
     @apply font-bold;
     line-height: 1.2;
@@ -120,57 +69,49 @@
 }
 
 @layer components {
-  /* Modern card with perfect spacing */
-  .modern-card {
-    @apply bg-white dark:bg-slate-800 border border-gray-200 dark:border-gray-700 rounded-2xl p-6 transition-all duration-200;
+  /* Crypto wallet card style */
+  .crypto-card {
+    @apply bg-gray-900 border border-gray-700 rounded-2xl p-6 transition-all duration-200;
   }
 
-  .modern-card:hover {
-    @apply border-gray-300 dark:border-gray-600 shadow-sm;
+  .crypto-card:hover {
+    @apply border-gray-600 shadow-lg;
   }
 
-  /* Modern button with perfect contrast */
-  .modern-button {
-    @apply bg-blue-600 hover:bg-blue-700 text-white rounded-2xl px-6 py-3 font-semibold text-sm transition-all duration-200;
+  /* Gradient cards for categories */
+  .gradient-card {
+    @apply relative overflow-hidden rounded-2xl p-6 transition-all duration-300 hover:scale-[1.02] cursor-pointer;
   }
 
-  .modern-button:hover {
+  /* Modern dark button */
+  .dark-button {
+    @apply bg-gray-900 hover:bg-gray-800 text-white rounded-2xl px-6 py-3 font-semibold text-sm transition-all duration-200 border border-gray-700;
+  }
+
+  .dark-button:hover {
     @apply scale-[1.02];
   }
 
-  /* Modern input with visible borders */
-  .modern-input {
-    @apply bg-white dark:bg-slate-800 border border-gray-200 dark:border-gray-700 rounded-xl px-4 py-3 text-sm text-gray-900 dark:text-white placeholder:text-gray-500 dark:placeholder:text-gray-400 focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition-all duration-200;
+  /* Dark input style */
+  .dark-input {
+    @apply bg-gray-900 border border-gray-700 rounded-xl px-4 py-3 text-sm text-white placeholder:text-gray-500 focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition-all duration-200;
   }
 
-  /* Perfect spacing system */
-  .spacing-xs { @apply space-y-2; }
-  .spacing-sm { @apply space-y-3; }
-  .spacing-md { @apply space-y-4; }
-  .spacing-lg { @apply space-y-6; }
-  .spacing-xl { @apply space-y-8; }
-
-  /* Padding system */
-  .padding-xs { @apply p-2; }
-  .padding-sm { @apply p-3; }
-  .padding-md { @apply p-4; }
-  .padding-lg { @apply p-6; }
-  .padding-xl { @apply p-8; }
-
-  /* Margin system */
-  .margin-xs { @apply m-2; }
-  .margin-sm { @apply m-3; }
-  .margin-md { @apply m-4; }
-  .margin-lg { @apply m-6; }
-  .margin-xl { @apply m-8; }
-
-  /* Income/Expense indicators with perfect contrast */
-  .income-indicator {
-    @apply text-green-700 dark:text-green-300 bg-green-50 dark:bg-green-950;
+  /* Gradient backgrounds for transaction cards */
+  .gradient-blue {
+    background: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%);
   }
 
-  .expense-indicator {
-    @apply text-red-700 dark:text-red-300 bg-red-50 dark:bg-red-950;
+  .gradient-purple {
+    background: linear-gradient(135deg, #8b5cf6 0%, #ec4899 100%);
+  }
+
+  .gradient-green {
+    background: linear-gradient(135deg, #10b981 0%, #3b82f6 100%);
+  }
+
+  .gradient-orange {
+    background: linear-gradient(135deg, #f97316 0%, #ef4444 100%);
   }
 
   /* Smooth animations */
@@ -184,6 +125,12 @@
 
   .scale-in {
     animation: scaleIn 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  /* Backdrop blur for navigation */
+  .backdrop-blur-nav {
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
   }
 }
 
@@ -220,13 +167,13 @@
   }
 }
 
-/* Hide scrollbars but keep functionality */
+/* Hide scrollbars completely */
 .scrollable {
   overflow-y: auto;
   overflow-x: hidden;
 }
 
-/* Perfect focus states with high contrast */
+/* Perfect focus states for dark theme */
 .focus-visible\:ring-2:focus-visible {
   outline: 2px solid transparent;
   outline-offset: 2px;
@@ -247,39 +194,39 @@ button, input, textarea, select {
   transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-/* High contrast text utilities */
+/* Dark theme text utilities */
 .text-high-contrast {
-  @apply text-gray-900 dark:text-white;
+  @apply text-white;
 }
 
 .text-medium-contrast {
-  @apply text-gray-700 dark:text-gray-300;
+  @apply text-gray-300;
 }
 
 .text-low-contrast {
-  @apply text-gray-500 dark:text-gray-400;
+  @apply text-gray-400;
 }
 
-/* Icon colors with perfect contrast */
+/* Icon colors for dark theme */
 .icon-primary {
-  @apply text-blue-600 dark:text-blue-400;
+  @apply text-blue-400;
 }
 
 .icon-secondary {
-  @apply text-gray-600 dark:text-gray-300;
+  @apply text-gray-300;
 }
 
 .icon-muted {
-  @apply text-gray-500 dark:text-gray-400;
+  @apply text-gray-400;
 }
 
-/* Perfect navbar styling */
+/* Dark navbar styling */
 .navbar-item {
-  @apply text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white;
+  @apply text-gray-400 hover:text-white;
 }
 
 .navbar-item-active {
-  @apply text-blue-600 dark:text-blue-400 bg-blue-50 dark:bg-blue-950/50;
+  @apply text-white bg-white/10;
 }
 
 /* Consistent border radius */
@@ -287,11 +234,54 @@ button, input, textarea, select {
   @apply rounded-2xl;
 }
 
-/* Perfect shadows */
-.shadow-modern {
-  box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px 0 rgb(0 0 0 / 0.06);
+/* Dark theme shadows */
+.shadow-dark {
+  box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.3), 0 2px 4px -1px rgb(0 0 0 / 0.2);
 }
 
-.shadow-modern-lg {
-  box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -1px rgb(0 0 0 / 0.06);
+.shadow-dark-lg {
+  box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.3), 0 4px 6px -2px rgb(0 0 0 / 0.2);
+}
+
+/* Glassmorphism effect */
+.glass {
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Custom calendar styling for dark theme */
+.rdp {
+  --rdp-cell-size: 40px;
+  --rdp-accent-color: #3b82f6;
+  --rdp-background-color: #1f2937;
+  --rdp-accent-color-dark: #2563eb;
+  --rdp-background-color-dark: #111827;
+  --rdp-outline: 2px solid var(--rdp-accent-color);
+  --rdp-outline-selected: 3px solid var(--rdp-accent-color);
+}
+
+.rdp-months {
+  @apply text-white;
+}
+
+.rdp-head_cell {
+  @apply text-gray-400;
+}
+
+.rdp-cell {
+  @apply text-white;
+}
+
+.rdp-day {
+  @apply hover:bg-gray-700 rounded-lg;
+}
+
+.rdp-day_selected {
+  @apply bg-blue-600 text-white;
+}
+
+.rdp-day_today {
+  @apply bg-gray-700 text-white;
 }

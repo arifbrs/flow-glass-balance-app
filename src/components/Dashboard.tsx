@@ -1,4 +1,4 @@
-import { TrendingUp, TrendingDown, Wallet, Plus, MoreHorizontal } from 'lucide-react';
+import { TrendingUp, TrendingDown, ArrowUpRight, ArrowDownLeft, MoreHorizontal, Bell, Plus } from 'lucide-react';
 import { Card } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { useState, useEffect } from 'react';
@@ -38,192 +38,155 @@ const Dashboard = ({ transactions, monthlyBudget, onDeleteTransaction }: Dashboa
 
   const balance = totalIncome - totalExpenses;
 
-  const recentTransactions = transactions
-    .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
-    .slice(0, 8);
+  // Group transactions by category for the card view
+  const categoryGroups = currentMonthTransactions.reduce((acc, transaction) => {
+    const category = transaction.category;
+    if (!acc[category]) {
+      acc[category] = {
+        category,
+        total: 0,
+        type: transaction.type,
+        transactions: []
+      };
+    }
+    acc[category].total += transaction.amount;
+    acc[category].transactions.push(transaction);
+    return acc;
+  }, {} as Record<string, { category: string; total: number; type: 'income' | 'expense'; transactions: Transaction[] }>);
+
+  const categoryCards = Object.values(categoryGroups).slice(0, 4);
 
   const formatCurrency = (amount: number) => {
-    return new Intl.NumberFormat('id-ID').format(amount);
+    return new Intl.NumberFormat('en-US', {
+      style: 'currency',
+      currency: 'USD',
+      minimumFractionDigits: 2
+    }).format(amount);
   };
 
+  const getPercentageChange = () => {
+    // Mock percentage for demo - in real app this would be calculated from previous period
+    return balance > 0 ? "+6.96%" : "-2.34%";
+  };
+
+  const getCategoryIcon = (category: string) => {
+    const firstLetter = category.charAt(0).toUpperCase();
+    return firstLetter;
+  };
+
+  const gradientColors = [
+    'from-blue-600 to-purple-600',
+    'from-purple-600 to-pink-600', 
+    'from-green-500 to-blue-500',
+    'from-orange-500 to-red-500'
+  ];
+
   return (
-    <div className="min-h-screen bg-gray-50 dark:bg-slate-900">
-      {/* Header - Fixed spacing and typography */}
-      <div className="sticky top-0 bg-white/95 dark:bg-slate-900/95 backdrop-blur-lg border-b border-gray-200 dark:border-gray-700 z-10">
-        {/* REMOVED: Header container div */}
+    <div className="min-h-screen bg-black text-white">
+      {/* Header */}
+      <div className="flex items-center justify-between p-6 pt-12">
+        <div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center">
+          <div className="w-10 h-10 rounded-xl bg-white/20 flex items-center justify-center">
+            <span className="text-white font-bold text-lg">U</span>
+          </div>
+        </div>
+        
+        <div className="flex items-center space-x-4">
+          <Button variant="ghost" size="icon" className="text-white hover:bg-white/10 rounded-full">
+            <Bell className="w-6 h-6" />
+          </Button>
+          <Button variant="ghost" size="icon" className="text-white hover:bg-white/10 rounded-full">
+            <MoreHorizontal className="w-6 h-6" />
+          </Button>
+        </div>
       </div>
 
-      <div className="max-w-md mx-auto px-6 pb-32 space-y-6">
-        {/* REMOVED: Motivational Message div */}
-
-        {/* Balance Card - Modern dark design like the screenshot */}
-        <div className="bg-gradient-to-br from-gray-900 to-black dark:from-gray-800 dark:to-gray-900 rounded-3xl p-8 border border-gray-800 dark:border-gray-700 mt-6 shadow-2xl">
-          <div className="space-y-6">
-            {/* Header with greeting and profile */}
-            <div className="flex items-center justify-between">
-              <div>
-                <h2 className="text-white text-2xl font-bold">Hello, User</h2>
-                <p className="text-gray-400 text-sm mt-1">Welcome back</p>
-              </div>
-              <div className="w-12 h-12 rounded-2xl bg-gray-700 flex items-center justify-center">
-                <div className="w-8 h-8 rounded-xl bg-gray-500"></div>
-              </div>
-            </div>
-
-            {/* Tab indicators */}
-            <div className="flex space-x-8">
-              <div className="flex flex-col items-center">
-                <span className="text-white text-sm font-medium">Hub</span>
-                <div className="w-8 h-0.5 bg-white mt-2 rounded-full"></div>
-              </div>
-              <div className="flex flex-col items-center">
-                <span className="text-gray-400 text-sm">Cash</span>
-                <div className="w-8 h-0.5 bg-transparent mt-2"></div>
-              </div>
-              <div className="flex flex-col items-center">
-                <span className="text-gray-400 text-sm">Crypto</span>
-                <div className="w-8 h-0.5 bg-transparent mt-2"></div>
-              </div>
-            </div>
-
-            {/* Main balance section */}
-            <div className="bg-gray-800/50 rounded-2xl p-6 border border-gray-700/50">
-              <div className="flex items-center justify-between mb-2">
-                <span className="text-gray-400 text-sm">All accounts • Total balance</span>
-                <span className="text-gray-400 text-xs">UST ↗</span>
-              </div>
-              <div className="flex items-baseline space-x-1">
-                <span className="text-white text-4xl font-bold">
-                  Rp{formatCurrency(Math.abs(balance))}
-                </span>
-                <span className="text-gray-400 text-lg">.00</span>
-              </div>
-            </div>
-
-            {/* Action buttons */}
-            <div className="flex justify-between pt-2">
-              <div className="flex flex-col items-center space-y-2">
-                <div className="w-12 h-12 rounded-2xl bg-gray-700 flex items-center justify-center">
-                  <TrendingDown className="w-6 h-6 text-gray-300" />
-                </div>
-                <span className="text-gray-400 text-xs">Deposit</span>
-              </div>
-              <div className="flex flex-col items-center space-y-2">
-                <div className="w-12 h-12 rounded-2xl bg-gray-700 flex items-center justify-center">
-                  <TrendingUp className="w-6 h-6 text-gray-300" />
-                </div>
-                <span className="text-gray-400 text-xs">Withdraw</span>
-              </div>
-              <div className="flex flex-col items-center space-y-2">
-                <div className="w-12 h-12 rounded-2xl bg-gray-700 flex items-center justify-center">
-                  <Plus className="w-6 h-6 text-gray-300" />
-                </div>
-                <span className="text-gray-400 text-xs">Transfer</span>
-              </div>
-            </div>
+      {/* Balance Section */}
+      <div className="px-6 mb-8">
+        <p className="text-gray-400 text-sm mb-2">Balance</p>
+        <div className="flex items-center space-x-4 mb-6">
+          <h1 className="text-4xl font-bold text-white">
+            {formatCurrency(balance)}
+          </h1>
+          <div className="bg-blue-600 px-3 py-1 rounded-full">
+            <span className="text-white text-sm font-medium">{getPercentageChange()}</span>
           </div>
         </div>
 
-        {/* Stats Row - Better spacing and alignment */}
-        <div className="grid grid-cols-2 gap-4">
-          <div className="bg-white dark:bg-slate-800 rounded-2xl p-5 border border-gray-200 dark:border-gray-700">
-            <div className="space-y-3">
-              <div className="flex items-center space-x-3">
-                <div className="w-10 h-10 rounded-full bg-green-100 dark:bg-green-950 flex items-center justify-center">
-                  <TrendingUp className="w-5 h-5 text-green-600 dark:text-green-400" />
-                </div>
-                <span className="text-sm text-gray-600 dark:text-gray-400 font-medium">Income</span>
-              </div>
-              <p className="text-lg font-bold text-green-600 dark:text-green-400">
-                Rp{formatCurrency(totalIncome)}
-              </p>
-            </div>
-          </div>
+        {/* Action Buttons */}
+        <div className="flex justify-center space-x-8 mb-8">
+          <button className="w-16 h-16 bg-white rounded-full flex items-center justify-center hover:scale-105 transition-transform">
+            <ArrowUpRight className="w-6 h-6 text-black" />
+          </button>
+          <button className="w-16 h-16 bg-white rounded-full flex items-center justify-center hover:scale-105 transition-transform">
+            <ArrowDownLeft className="w-6 h-6 text-black" />
+          </button>
+          <button className="w-16 h-16 bg-white rounded-full flex items-center justify-center hover:scale-105 transition-transform">
+            <TrendingUp className="w-6 h-6 text-black" />
+          </button>
+        </div>
+      </div>
 
-          <div className="bg-white dark:bg-slate-800 rounded-2xl p-5 border border-gray-200 dark:border-gray-700">
-            <div className="space-y-3">
-              <div className="flex items-center space-x-3">
-                <div className="w-10 h-10 rounded-full bg-red-100 dark:bg-red-950 flex items-center justify-center">
-                  <TrendingDown className="w-5 h-5 text-red-600 dark:text-red-400" />
-                </div>
-                <span className="text-sm text-gray-600 dark:text-gray-400 font-medium">Expenses</span>
-              </div>
-              <p className="text-lg font-bold text-red-600 dark:text-red-400">
-                Rp{formatCurrency(totalExpenses)}
-              </p>
-            </div>
-          </div>
+      {/* My Transactions Section */}
+      <div className="px-6">
+        <div className="flex items-center justify-between mb-6">
+          <h2 className="text-xl font-semibold text-white">My transactions</h2>
+          <button className="text-gray-400 text-sm hover:text-white transition-colors">
+            See all
+          </button>
         </div>
 
-        {/* Recent Transactions - Better layout */}
+        {/* Transaction Cards */}
         <div className="space-y-4">
-          <div className="flex items-center justify-between">
-            <h2 className="text-lg font-bold text-gray-900 dark:text-white">Recent Activity</h2>
-            {recentTransactions.length > 0 && (
-              <span className="text-sm text-gray-500 dark:text-gray-400">
-                {recentTransactions.length} transactions
-              </span>
-            )}
-          </div>
-
-          {recentTransactions.length > 0 ? (
-            <div className="space-y-3">
-              {recentTransactions.map((transaction) => (
-                <div key={transaction.id} className="bg-white dark:bg-slate-800 rounded-2xl p-4 border border-gray-200 dark:border-gray-700 hover:border-gray-300 dark:hover:border-gray-600 transition-colors">
-                  <div className="flex items-center justify-between">
-                    <div className="flex items-center space-x-4 flex-1 min-w-0">
-                      <div className={`w-12 h-12 rounded-full flex items-center justify-center ${
-                        transaction.type === 'income' 
-                          ? 'bg-green-100 dark:bg-green-950' 
-                          : 'bg-red-100 dark:bg-red-950'
-                      }`}>
-                        {transaction.type === 'income' ? (
-                          <TrendingUp className="w-6 h-6 text-green-600 dark:text-green-400" />
-                        ) : (
-                          <TrendingDown className="w-6 h-6 text-red-600 dark:text-red-400" />
-                        )}
-                      </div>
-                      <div className="flex-1 min-w-0">
-                        <div className="flex items-center justify-between">
-                          <p className="font-semibold text-sm text-gray-900 dark:text-white truncate">{transaction.category}</p>
-                          <p className={`font-bold text-sm ${
-                            transaction.type === 'income' ? 'text-green-600 dark:text-green-400' : 'text-red-600 dark:text-red-400'
-                          }`}>
-                            {transaction.type === 'income' ? '+' : '-'}Rp{formatCurrency(transaction.amount)}
-                          </p>
-                        </div>
-                        {transaction.description && (
-                          <p className="text-xs text-gray-500 dark:text-gray-400 truncate mt-1">
-                            {transaction.description}
-                          </p>
-                        )}
-                        <p className="text-xs text-gray-400 dark:text-gray-500 mt-1">
-                          {new Date(transaction.date).toLocaleDateString('id-ID', {
-                            day: 'numeric',
-                            month: 'short',
-                            hour: '2-digit',
-                            minute: '2-digit'
-                          })}
-                        </p>
-                      </div>
+          {categoryCards.length > 0 ? (
+            categoryCards.map((group, index) => (
+              <div
+                key={group.category}
+                className={`relative overflow-hidden rounded-2xl bg-gradient-to-r ${gradientColors[index % gradientColors.length]} p-6 hover:scale-[1.02] transition-transform cursor-pointer`}
+              >
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center space-x-4">
+                    <div className="w-12 h-12 bg-black/30 rounded-2xl flex items-center justify-center backdrop-blur-sm">
+                      <span className="text-white font-bold text-lg">
+                        {getCategoryIcon(group.category)}
+                      </span>
+                    </div>
+                    <div>
+                      <h3 className="text-white font-semibold text-lg">{group.category}</h3>
+                      <p className="text-white/70 text-sm">
+                        {group.transactions.length} transaction{group.transactions.length !== 1 ? 's' : ''}
+                      </p>
                     </div>
                   </div>
+                  
+                  <div className="bg-white/20 backdrop-blur-sm rounded-xl px-4 py-2">
+                    <span className="text-white font-semibold">
+                      {formatCurrency(group.total)}
+                    </span>
+                  </div>
                 </div>
-              ))}
-            </div>
-          ) : (
-            <div className="bg-white dark:bg-slate-800 rounded-2xl p-8 border border-gray-200 dark:border-gray-700 text-center">
-              <div className="w-16 h-16 rounded-full bg-gray-100 dark:bg-gray-800 flex items-center justify-center mx-auto mb-4">
-                <Wallet className="w-8 h-8 text-gray-400 dark:text-gray-500" />
+                
+                {/* Decorative background elements */}
+                <div className="absolute -right-8 -bottom-8 w-24 h-24 bg-white/10 rounded-full blur-xl"></div>
+                <div className="absolute -right-4 -top-4 w-16 h-16 bg-white/5 rounded-full blur-lg"></div>
               </div>
-              <p className="font-semibold text-gray-900 dark:text-white">No transactions yet</p>
-              <p className="text-sm text-gray-500 dark:text-gray-400 mt-1">
+            ))
+          ) : (
+            <div className="text-center py-12">
+              <div className="w-16 h-16 bg-gray-800 rounded-full flex items-center justify-center mx-auto mb-4">
+                <TrendingUp className="w-8 h-8 text-gray-400" />
+              </div>
+              <p className="text-gray-400 text-lg font-medium">No transactions yet</p>
+              <p className="text-gray-500 text-sm mt-1">
                 Start by adding your first transaction
               </p>
             </div>
           )}
         </div>
       </div>
+
+      {/* Bottom spacing for navigation */}
+      <div className="h-32"></div>
     </div>
   );
 };
