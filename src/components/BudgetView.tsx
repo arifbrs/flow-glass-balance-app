@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Target, Edit2, Check, X, Plus, MoreHorizontal } from 'lucide-react';
+import { Target, Edit2, Check, X, Plus, MoreHorizontal, ArrowLeft } from 'lucide-react';
 import { Card } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -93,37 +93,44 @@ const BudgetView = ({ transactions, monthlyBudget, onUpdateBudget }: BudgetViewP
   };
 
   return (
-    <div className="min-h-screen bg-black text-white">
-      {/* Header - Refined spacing */}
-      <div className="flex items-center justify-between px-5 pt-14 pb-6 border-b border-gray-800">
-        <div>
-          <h1 className="text-xl font-bold text-white">Budget</h1>
-          <p className="text-sm text-gray-400 mt-1 font-medium">
-            {new Date().toLocaleDateString('en-US', { month: 'long', year: 'numeric' })}
-          </p>
+    <div className="min-h-screen bg-gray-50">
+      {/* Header */}
+      <div className="bg-white px-6 pt-12 pb-6">
+        <div className="flex items-center justify-between">
+          <div className="flex items-center space-x-4">
+            <Button variant="ghost" size="icon" className="text-gray-600 hover:bg-gray-100 rounded-full w-9 h-9">
+              <ArrowLeft className="w-5 h-5" />
+            </Button>
+            <div>
+              <h1 className="text-xl font-bold text-gray-900">Budget</h1>
+              <p className="text-sm text-gray-500">
+                {new Date().toLocaleDateString('en-US', { month: 'long', year: 'numeric' })}
+              </p>
+            </div>
+          </div>
+          <Button variant="ghost" size="icon" className="text-gray-600 hover:bg-gray-100 rounded-full w-9 h-9">
+            <MoreHorizontal className="w-5 h-5" />
+          </Button>
         </div>
-        <Button variant="ghost" size="icon" className="rounded-full text-gray-400 hover:text-white hover:bg-gray-800 w-10 h-10">
-          <MoreHorizontal className="w-5 h-5" />
-        </Button>
       </div>
 
-      <div className="px-5 pt-6 pb-28 space-y-6">
-        {/* Budget Setting - Better spacing */}
-        <div className="bg-gray-900 border border-gray-700 rounded-2xl p-5">
+      <div className="px-6 py-6 space-y-6">
+        {/* Budget Setting Card */}
+        <div className="bg-white rounded-3xl p-6">
           <div className="space-y-4">
             <div className="flex items-center justify-between">
               <div className="flex items-center space-x-3">
-                <div className="w-11 h-11 bg-blue-600 rounded-2xl flex items-center justify-center">
-                  <Target className="w-5 h-5 text-white" />
+                <div className="w-10 h-10 bg-blue-100 rounded-xl flex items-center justify-center">
+                  <Target className="w-5 h-5 text-blue-600" />
                 </div>
-                <span className="font-semibold text-white text-base">Monthly Budget</span>
+                <span className="font-semibold text-gray-900">Monthly Budget</span>
               </div>
               {!isEditingBudget && (
                 <Button
                   variant="ghost"
                   size="sm"
                   onClick={handleSetBudget}
-                  className="rounded-full h-9 w-9 p-0 text-gray-400 hover:text-white hover:bg-gray-800"
+                  className="text-gray-500 hover:text-gray-700 hover:bg-gray-100 rounded-full w-8 h-8 p-0"
                 >
                   {monthlyBudget > 0 ? <Edit2 className="w-4 h-4" /> : <Plus className="w-4 h-4" />}
                 </Button>
@@ -134,7 +141,7 @@ const BudgetView = ({ transactions, monthlyBudget, onUpdateBudget }: BudgetViewP
               <div className="space-y-4">
                 <div className="flex space-x-3">
                   <div className="relative flex-1">
-                    <span className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400 text-sm font-medium">
+                    <span className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-500 text-sm font-medium">
                       $
                     </span>
                     <Input
@@ -142,7 +149,7 @@ const BudgetView = ({ transactions, monthlyBudget, onUpdateBudget }: BudgetViewP
                       value={displayBudget}
                       onChange={(e) => handleBudgetInputChange(e.target.value)}
                       placeholder="Enter budget amount"
-                      className="pl-12 rounded-xl border-gray-700 bg-gray-800 text-white h-12 focus:border-blue-500 focus:ring-blue-500/20 text-base"
+                      className="pl-12 rounded-xl border-gray-200 bg-white text-gray-900 h-12 focus:border-blue-500 focus:ring-blue-500/20"
                     />
                   </div>
                   <Button
@@ -156,7 +163,7 @@ const BudgetView = ({ transactions, monthlyBudget, onUpdateBudget }: BudgetViewP
                     onClick={handleBudgetCancel}
                     variant="ghost"
                     size="sm"
-                    className="rounded-xl h-12 px-4 text-gray-400 hover:text-white hover:bg-gray-800"
+                    className="rounded-xl h-12 px-4 text-gray-500 hover:text-gray-700 hover:bg-gray-100"
                   >
                     <X className="w-4 h-4" />
                   </Button>
@@ -166,20 +173,20 @@ const BudgetView = ({ transactions, monthlyBudget, onUpdateBudget }: BudgetViewP
               <div className="text-center space-y-3">
                 {monthlyBudget > 0 ? (
                   <>
-                    <p className="text-3xl font-bold text-white">
+                    <p className="text-3xl font-bold text-gray-900">
                       {formatCurrency(monthlyBudget)}
                     </p>
-                    <p className={`text-sm font-semibold ${budgetRemaining >= 0 ? 'text-green-400' : 'text-red-400'}`}>
+                    <p className={`text-sm font-semibold ${budgetRemaining >= 0 ? 'text-green-600' : 'text-red-600'}`}>
                       {formatCurrency(Math.abs(budgetRemaining))} {budgetRemaining >= 0 ? 'remaining' : 'over budget'}
                     </p>
                   </>
                 ) : (
                   <div className="py-8 text-center">
-                    <div className="w-16 h-16 rounded-full bg-gray-800 flex items-center justify-center mx-auto mb-4">
+                    <div className="w-16 h-16 rounded-full bg-gray-100 flex items-center justify-center mx-auto mb-4">
                       <Target className="w-8 h-8 text-gray-400" />
                     </div>
-                    <p className="font-semibold text-white text-base">No budget set</p>
-                    <p className="text-sm text-gray-400 mt-2 font-medium">
+                    <p className="font-semibold text-gray-900">No budget set</p>
+                    <p className="text-sm text-gray-500 mt-2">
                       Tap + to set your monthly budget
                     </p>
                   </div>
@@ -189,19 +196,19 @@ const BudgetView = ({ transactions, monthlyBudget, onUpdateBudget }: BudgetViewP
           </div>
         </div>
 
-        {/* Budget Progress - Better spacing */}
+        {/* Budget Progress */}
         {monthlyBudget > 0 && (
-          <div className="bg-gray-900 border border-gray-700 rounded-2xl p-5">
+          <div className="bg-white rounded-3xl p-6">
             <div className="space-y-5">
-              <h3 className="font-semibold text-white text-base">Budget Progress</h3>
+              <h3 className="font-semibold text-gray-900">Budget Progress</h3>
               
               <div className="space-y-4">
                 <div className="flex justify-between text-sm">
-                  <span className="text-gray-400 font-medium">Spent: <span className="font-semibold text-red-400">{formatCurrency(totalExpenses)}</span></span>
-                  <span className="text-gray-400 font-medium">Budget: <span className="font-semibold text-blue-400">{formatCurrency(monthlyBudget)}</span></span>
+                  <span className="text-gray-600">Spent: <span className="font-semibold text-red-600">{formatCurrency(totalExpenses)}</span></span>
+                  <span className="text-gray-600">Budget: <span className="font-semibold text-blue-600">{formatCurrency(monthlyBudget)}</span></span>
                 </div>
                 
-                <div className="w-full bg-gray-700 rounded-full h-3">
+                <div className="w-full bg-gray-200 rounded-full h-3">
                   <div
                     className={`h-3 rounded-full transition-all duration-500 ${
                       budgetUsedPercentage > 100 
@@ -217,25 +224,25 @@ const BudgetView = ({ transactions, monthlyBudget, onUpdateBudget }: BudgetViewP
                 <div className="text-center">
                   <p className={`text-2xl font-bold ${
                     budgetUsedPercentage > 100 
-                      ? 'text-red-400' 
+                      ? 'text-red-600' 
                       : budgetUsedPercentage > 80 
-                        ? 'text-yellow-400' 
-                        : 'text-green-400'
+                        ? 'text-yellow-600' 
+                        : 'text-green-600'
                   }`}>
                     {budgetUsedPercentage.toFixed(1)}%
                   </p>
-                  <p className="text-sm text-gray-400 font-medium">of budget used</p>
+                  <p className="text-sm text-gray-500">of budget used</p>
                 </div>
               </div>
             </div>
           </div>
         )}
 
-        {/* Category Breakdown - Better spacing */}
+        {/* Category Breakdown */}
         {sortedCategories.length > 0 && (
-          <div className="bg-gray-900 border border-gray-700 rounded-2xl p-5">
+          <div className="bg-white rounded-3xl p-6">
             <div className="space-y-5">
-              <h3 className="font-semibold text-white text-base">Top Spending Categories</h3>
+              <h3 className="font-semibold text-gray-900">Top Spending Categories</h3>
               
               <div className="space-y-4">
                 {sortedCategories.map(([category, amount]) => {
@@ -244,16 +251,16 @@ const BudgetView = ({ transactions, monthlyBudget, onUpdateBudget }: BudgetViewP
                   return (
                     <div key={category} className="space-y-3">
                       <div className="flex justify-between items-center">
-                        <span className="text-sm font-semibold text-white">{category}</span>
-                        <span className="text-sm text-red-400 font-bold">{formatCurrency(amount)}</span>
+                        <span className="text-sm font-semibold text-gray-900">{category}</span>
+                        <span className="text-sm text-red-600 font-bold">{formatCurrency(amount)}</span>
                       </div>
-                      <div className="w-full bg-gray-700 rounded-full h-2">
+                      <div className="w-full bg-gray-200 rounded-full h-2">
                         <div
                           className="h-2 rounded-full bg-red-500 transition-all duration-300"
                           style={{ width: `${percentage}%` }}
                         ></div>
                       </div>
-                      <p className="text-xs text-gray-400 font-medium">
+                      <p className="text-xs text-gray-500">
                         {percentage.toFixed(1)}% of total expenses
                       </p>
                     </div>
@@ -264,6 +271,9 @@ const BudgetView = ({ transactions, monthlyBudget, onUpdateBudget }: BudgetViewP
           </div>
         )}
       </div>
+
+      {/* Bottom spacing */}
+      <div className="h-24"></div>
     </div>
   );
 };
