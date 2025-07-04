@@ -94,36 +94,36 @@ const BudgetView = ({ transactions, monthlyBudget, onUpdateBudget }: BudgetViewP
 
   return (
     <div className="min-h-screen bg-black text-white">
-      {/* Header */}
-      <div className="flex items-center justify-between p-6 pt-12 border-b border-gray-800">
+      {/* Header - Refined spacing */}
+      <div className="flex items-center justify-between px-5 pt-14 pb-6 border-b border-gray-800">
         <div>
           <h1 className="text-xl font-bold text-white">Budget</h1>
-          <p className="text-sm text-gray-400 mt-1">
+          <p className="text-sm text-gray-400 mt-1 font-medium">
             {new Date().toLocaleDateString('en-US', { month: 'long', year: 'numeric' })}
           </p>
         </div>
-        <Button variant="ghost" size="icon" className="rounded-full text-gray-400 hover:text-white hover:bg-gray-800">
+        <Button variant="ghost" size="icon" className="rounded-full text-gray-400 hover:text-white hover:bg-gray-800 w-10 h-10">
           <MoreHorizontal className="w-5 h-5" />
         </Button>
       </div>
 
-      <div className="p-6 pb-32 space-y-6">
-        {/* Budget Setting */}
-        <div className="bg-gray-900 border border-gray-700 rounded-2xl p-6">
+      <div className="px-5 pt-6 pb-28 space-y-6">
+        {/* Budget Setting - Better spacing */}
+        <div className="bg-gray-900 border border-gray-700 rounded-2xl p-5">
           <div className="space-y-4">
             <div className="flex items-center justify-between">
               <div className="flex items-center space-x-3">
-                <div className="w-12 h-12 bg-blue-600 rounded-2xl flex items-center justify-center">
-                  <Target className="w-6 h-6 text-white" />
+                <div className="w-11 h-11 bg-blue-600 rounded-2xl flex items-center justify-center">
+                  <Target className="w-5 h-5 text-white" />
                 </div>
-                <span className="font-semibold text-white">Monthly Budget</span>
+                <span className="font-semibold text-white text-base">Monthly Budget</span>
               </div>
               {!isEditingBudget && (
                 <Button
                   variant="ghost"
                   size="sm"
                   onClick={handleSetBudget}
-                  className="rounded-full h-10 w-10 p-0 text-gray-400 hover:text-white hover:bg-gray-800"
+                  className="rounded-full h-9 w-9 p-0 text-gray-400 hover:text-white hover:bg-gray-800"
                 >
                   {monthlyBudget > 0 ? <Edit2 className="w-4 h-4" /> : <Plus className="w-4 h-4" />}
                 </Button>
@@ -142,7 +142,7 @@ const BudgetView = ({ transactions, monthlyBudget, onUpdateBudget }: BudgetViewP
                       value={displayBudget}
                       onChange={(e) => handleBudgetInputChange(e.target.value)}
                       placeholder="Enter budget amount"
-                      className="pl-12 rounded-xl border-gray-700 bg-gray-800 text-white h-12 focus:border-blue-500 focus:ring-blue-500/20"
+                      className="pl-12 rounded-xl border-gray-700 bg-gray-800 text-white h-12 focus:border-blue-500 focus:ring-blue-500/20 text-base"
                     />
                   </div>
                   <Button
@@ -178,8 +178,8 @@ const BudgetView = ({ transactions, monthlyBudget, onUpdateBudget }: BudgetViewP
                     <div className="w-16 h-16 rounded-full bg-gray-800 flex items-center justify-center mx-auto mb-4">
                       <Target className="w-8 h-8 text-gray-400" />
                     </div>
-                    <p className="font-semibold text-white">No budget set</p>
-                    <p className="text-sm text-gray-400 mt-2">
+                    <p className="font-semibold text-white text-base">No budget set</p>
+                    <p className="text-sm text-gray-400 mt-2 font-medium">
                       Tap + to set your monthly budget
                     </p>
                   </div>
@@ -189,21 +189,21 @@ const BudgetView = ({ transactions, monthlyBudget, onUpdateBudget }: BudgetViewP
           </div>
         </div>
 
-        {/* Budget Progress */}
+        {/* Budget Progress - Better spacing */}
         {monthlyBudget > 0 && (
-          <div className="bg-gray-900 border border-gray-700 rounded-2xl p-6">
+          <div className="bg-gray-900 border border-gray-700 rounded-2xl p-5">
             <div className="space-y-5">
-              <h3 className="font-semibold text-white">Budget Progress</h3>
+              <h3 className="font-semibold text-white text-base">Budget Progress</h3>
               
               <div className="space-y-4">
                 <div className="flex justify-between text-sm">
-                  <span className="text-gray-400">Spent: <span className="font-semibold text-red-400">{formatCurrency(totalExpenses)}</span></span>
-                  <span className="text-gray-400">Budget: <span className="font-semibold text-blue-400">{formatCurrency(monthlyBudget)}</span></span>
+                  <span className="text-gray-400 font-medium">Spent: <span className="font-semibold text-red-400">{formatCurrency(totalExpenses)}</span></span>
+                  <span className="text-gray-400 font-medium">Budget: <span className="font-semibold text-blue-400">{formatCurrency(monthlyBudget)}</span></span>
                 </div>
                 
-                <div className="w-full bg-gray-700 rounded-full h-4">
+                <div className="w-full bg-gray-700 rounded-full h-3">
                   <div
-                    className={`h-4 rounded-full transition-all duration-500 ${
+                    className={`h-3 rounded-full transition-all duration-500 ${
                       budgetUsedPercentage > 100 
                         ? 'bg-red-500' 
                         : budgetUsedPercentage > 80 
@@ -224,20 +224,20 @@ const BudgetView = ({ transactions, monthlyBudget, onUpdateBudget }: BudgetViewP
                   }`}>
                     {budgetUsedPercentage.toFixed(1)}%
                   </p>
-                  <p className="text-sm text-gray-400">of budget used</p>
+                  <p className="text-sm text-gray-400 font-medium">of budget used</p>
                 </div>
               </div>
             </div>
           </div>
         )}
 
-        {/* Category Breakdown */}
+        {/* Category Breakdown - Better spacing */}
         {sortedCategories.length > 0 && (
-          <div className="bg-gray-900 border border-gray-700 rounded-2xl p-6">
+          <div className="bg-gray-900 border border-gray-700 rounded-2xl p-5">
             <div className="space-y-5">
-              <h3 className="font-semibold text-white">Top Spending Categories</h3>
+              <h3 className="font-semibold text-white text-base">Top Spending Categories</h3>
               
-              <div className="space-y-5">
+              <div className="space-y-4">
                 {sortedCategories.map(([category, amount]) => {
                   const percentage = totalExpenses > 0 ? (amount / totalExpenses) * 100 : 0;
                   
@@ -247,13 +247,13 @@ const BudgetView = ({ transactions, monthlyBudget, onUpdateBudget }: BudgetViewP
                         <span className="text-sm font-semibold text-white">{category}</span>
                         <span className="text-sm text-red-400 font-bold">{formatCurrency(amount)}</span>
                       </div>
-                      <div className="w-full bg-gray-700 rounded-full h-3">
+                      <div className="w-full bg-gray-700 rounded-full h-2">
                         <div
-                          className="h-3 rounded-full bg-red-500 transition-all duration-300"
+                          className="h-2 rounded-full bg-red-500 transition-all duration-300"
                           style={{ width: `${percentage}%` }}
                         ></div>
                       </div>
-                      <p className="text-xs text-gray-400">
+                      <p className="text-xs text-gray-400 font-medium">
                         {percentage.toFixed(1)}% of total expenses
                       </p>
                     </div>

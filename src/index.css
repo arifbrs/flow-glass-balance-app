@@ -2,7 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Dark Crypto Wallet Theme */
+/* Dark Crypto Wallet Theme - Refined Typography & Spacing */
 
 @layer base {
   :root {
@@ -52,49 +52,63 @@
   }
 
   body {
-    @apply bg-black text-white font-sans;
+    @apply bg-black text-white;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
     font-feature-settings: "rlig" 1, "calt" 1;
-    line-height: 1.6;
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    line-height: 1.5;
+    letter-spacing: -0.01em;
   }
 
-  h1, h2, h3, h4, h5, h6 {
-    @apply font-bold;
-    line-height: 1.2;
+  /* Perfect typography hierarchy */
+  h1 {
+    @apply font-bold text-xl leading-tight tracking-tight;
+  }
+
+  h2 {
+    @apply font-bold text-lg leading-tight tracking-tight;
+  }
+
+  h3 {
+    @apply font-semibold text-base leading-tight;
   }
 
   p {
-    line-height: 1.6;
+    line-height: 1.5;
+  }
+
+  /* Consistent button and input heights */
+  .h-13 {
+    height: 3.25rem;
   }
 }
 
 @layer components {
-  /* Crypto wallet card style */
+  /* Crypto wallet card style - refined */
   .crypto-card {
-    @apply bg-gray-900 border border-gray-700 rounded-2xl p-6 transition-all duration-200;
+    @apply bg-gray-900 border border-gray-700 rounded-2xl p-5 transition-all duration-200;
   }
 
   .crypto-card:hover {
     @apply border-gray-600 shadow-lg;
   }
 
-  /* Gradient cards for categories */
+  /* Gradient cards for categories - better proportions */
   .gradient-card {
-    @apply relative overflow-hidden rounded-2xl p-6 transition-all duration-300 hover:scale-[1.02] cursor-pointer;
+    @apply relative overflow-hidden rounded-2xl p-5 transition-all duration-300 hover:scale-[1.02] cursor-pointer;
   }
 
-  /* Modern dark button */
+  /* Modern dark button - consistent sizing */
   .dark-button {
-    @apply bg-gray-900 hover:bg-gray-800 text-white rounded-2xl px-6 py-3 font-semibold text-sm transition-all duration-200 border border-gray-700;
+    @apply bg-gray-900 hover:bg-gray-800 text-white rounded-2xl px-5 py-3 font-semibold text-sm transition-all duration-200 border border-gray-700;
   }
 
   .dark-button:hover {
     @apply scale-[1.02];
   }
 
-  /* Dark input style */
+  /* Dark input style - consistent sizing */
   .dark-input {
-    @apply bg-gray-900 border border-gray-700 rounded-xl px-4 py-3 text-sm text-white placeholder:text-gray-500 focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition-all duration-200;
+    @apply bg-gray-900 border border-gray-700 rounded-xl px-4 py-3 text-sm text-white placeholder:text-gray-500 focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition-all duration-200 h-12;
   }
 
   /* Gradient backgrounds for transaction cards */
@@ -131,6 +145,47 @@
   .backdrop-blur-nav {
     backdrop-filter: blur(20px);
     -webkit-backdrop-filter: blur(20px);
+  }
+
+  /* Consistent spacing utilities */
+  .space-y-3 > * + * {
+    margin-top: 0.75rem;
+  }
+
+  .space-y-4 > * + * {
+    margin-top: 1rem;
+  }
+
+  .space-y-5 > * + * {
+    margin-top: 1.25rem;
+  }
+
+  .space-y-6 > * + * {
+    margin-top: 1.5rem;
+  }
+
+  /* Perfect padding system */
+  .p-5 {
+    padding: 1.25rem;
+  }
+
+  .px-5 {
+    padding-left: 1.25rem;
+    padding-right: 1.25rem;
+  }
+
+  .py-5 {
+    padding-top: 1.25rem;
+    padding-bottom: 1.25rem;
+  }
+
+  /* Consistent margin system */
+  .mb-5 {
+    margin-bottom: 1.25rem;
+  }
+
+  .mt-5 {
+    margin-top: 1.25rem;
   }
 }
 
@@ -194,7 +249,7 @@ button, input, textarea, select {
   transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-/* Dark theme text utilities */
+/* Dark theme text utilities with perfect contrast */
 .text-high-contrast {
   @apply text-white;
 }
@@ -284,4 +339,72 @@ button, input, textarea, select {
 
 .rdp-day_today {
   @apply bg-gray-700 text-white;
+}
+
+/* Perfect font weight hierarchy */
+.font-medium {
+  font-weight: 500;
+}
+
+.font-semibold {
+  font-weight: 600;
+}
+
+.font-bold {
+  font-weight: 700;
+}
+
+/* Consistent letter spacing */
+.tracking-tight {
+  letter-spacing: -0.025em;
+}
+
+/* Perfect line heights */
+.leading-tight {
+  line-height: 1.25;
+}
+
+.leading-none {
+  line-height: 1;
+}
+
+/* Consistent text sizes with proper hierarchy */
+.text-xs {
+  font-size: 0.75rem;
+  line-height: 1rem;
+}
+
+.text-sm {
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+}
+
+.text-base {
+  font-size: 1rem;
+  line-height: 1.5rem;
+}
+
+.text-lg {
+  font-size: 1.125rem;
+  line-height: 1.75rem;
+}
+
+.text-xl {
+  font-size: 1.25rem;
+  line-height: 1.75rem;
+}
+
+.text-2xl {
+  font-size: 1.5rem;
+  line-height: 2rem;
+}
+
+.text-3xl {
+  font-size: 1.875rem;
+  line-height: 2.25rem;
+}
+
+.text-4xl {
+  font-size: 2.25rem;
+  line-height: 2.5rem;
 }

@@ -72,26 +72,26 @@ const TransactionForm = ({ type, onClose, onSubmit }: TransactionFormProps) => {
 
   return (
     <div className="min-h-screen bg-black text-white">
-      {/* Header */}
-      <div className="flex items-center justify-between p-6 pt-12 border-b border-gray-800">
+      {/* Header - Refined spacing */}
+      <div className="flex items-center justify-between px-5 pt-14 pb-6 border-b border-gray-800">
         <button
           onClick={onClose}
           className="p-2 rounded-full hover:bg-gray-800 transition-colors text-gray-400 hover:text-white"
         >
-          <ArrowLeft className="w-6 h-6" />
+          <ArrowLeft className="w-5 h-5" />
         </button>
         <h1 className="text-lg font-bold text-white">
           {type === 'income' ? 'Add Income' : 'Add Expense'}
         </h1>
-        <div className="w-10"></div>
+        <div className="w-9"></div>
       </div>
 
-      <div className="p-6 pb-32">
+      <div className="px-5 pt-6 pb-28">
         <form onSubmit={handleSubmit} className="space-y-6">
           {type === 'income' ? (
             <>
-              {/* Income Form */}
-              <div className="space-y-6">
+              {/* Income Form - Better spacing */}
+              <div className="space-y-5">
                 <div>
                   <Label htmlFor="description" className="text-sm font-semibold text-gray-300 mb-3 block">
                     Description
@@ -101,7 +101,7 @@ const TransactionForm = ({ type, onClose, onSubmit }: TransactionFormProps) => {
                     value={description}
                     onChange={(e) => setDescription(e.target.value)}
                     placeholder="e.g., Monthly salary, Freelance work"
-                    className="bg-gray-900 border-gray-700 text-white placeholder:text-gray-500 rounded-xl h-12 focus:border-blue-500 focus:ring-blue-500/20"
+                    className="bg-gray-900 border-gray-700 text-white placeholder:text-gray-500 rounded-xl h-12 focus:border-blue-500 focus:ring-blue-500/20 text-base"
                   />
                 </div>
 
@@ -110,7 +110,7 @@ const TransactionForm = ({ type, onClose, onSubmit }: TransactionFormProps) => {
                     Amount
                   </Label>
                   <div className="relative">
-                    <span className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400 font-medium">
+                    <span className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400 font-medium text-base">
                       $
                     </span>
                     <Input
@@ -130,7 +130,7 @@ const TransactionForm = ({ type, onClose, onSubmit }: TransactionFormProps) => {
                     <PopoverTrigger asChild>
                       <Button
                         variant="outline"
-                        className="w-full justify-start text-left font-normal bg-gray-900 border-gray-700 text-white hover:bg-gray-800 rounded-xl h-12"
+                        className="w-full justify-start text-left font-normal bg-gray-900 border-gray-700 text-white hover:bg-gray-800 rounded-xl h-12 text-base"
                       >
                         <Calendar className="mr-3 h-4 w-4" />
                         {date ? format(date, 'dd MMMM yyyy', { locale: id }) : 'Select date'}
@@ -162,14 +162,14 @@ const TransactionForm = ({ type, onClose, onSubmit }: TransactionFormProps) => {
                     value={category}
                     onChange={(e) => setCategory(e.target.value)}
                     placeholder="e.g., Salary, Freelance, Investment"
-                    className="bg-gray-900 border-gray-700 text-white placeholder:text-gray-500 rounded-xl h-12 focus:border-blue-500 focus:ring-blue-500/20"
+                    className="bg-gray-900 border-gray-700 text-white placeholder:text-gray-500 rounded-xl h-12 focus:border-blue-500 focus:ring-blue-500/20 text-base"
                   />
                 </div>
               </div>
             </>
           ) : (
             <>
-              {/* Expense Form with Calculator */}
+              {/* Expense Form with Calculator - Better spacing */}
               <div className="text-center space-y-6">
                 <div>
                   <Label className="text-sm font-semibold text-gray-300 mb-3 block">Amount</Label>
@@ -180,14 +180,14 @@ const TransactionForm = ({ type, onClose, onSubmit }: TransactionFormProps) => {
                   </div>
                 </div>
 
-                {/* Number Pad */}
+                {/* Number Pad - Better spacing */}
                 <div className="grid grid-cols-3 gap-3">
                   {[1, 2, 3, 4, 5, 6, 7, 8, 9].map((num) => (
                     <button
                       key={num}
                       type="button"
                       onClick={() => handleNumberPad(num.toString())}
-                      className="h-14 rounded-xl bg-gray-900 border border-gray-700 hover:bg-gray-800 transition-colors font-semibold text-white"
+                      className="h-12 rounded-xl bg-gray-900 border border-gray-700 hover:bg-gray-800 transition-colors font-semibold text-white text-base"
                     >
                       {num}
                     </button>
@@ -195,14 +195,14 @@ const TransactionForm = ({ type, onClose, onSubmit }: TransactionFormProps) => {
                   <button
                     type="button"
                     onClick={() => handleNumberPad('0')}
-                    className="h-14 rounded-xl bg-gray-900 border border-gray-700 hover:bg-gray-800 transition-colors font-semibold text-white col-span-2"
+                    className="h-12 rounded-xl bg-gray-900 border border-gray-700 hover:bg-gray-800 transition-colors font-semibold text-white col-span-2 text-base"
                   >
                     0
                   </button>
                   <button
                     type="button"
                     onClick={() => handleNumberPad('backspace')}
-                    className="h-14 rounded-xl bg-gray-900 border border-gray-700 hover:bg-gray-800 transition-colors font-semibold text-white"
+                    className="h-12 rounded-xl bg-gray-900 border border-gray-700 hover:bg-gray-800 transition-colors font-semibold text-white text-base"
                   >
                     ⌫
                   </button>
@@ -211,13 +211,13 @@ const TransactionForm = ({ type, onClose, onSubmit }: TransactionFormProps) => {
                 <button
                   type="button"
                   onClick={() => handleNumberPad('clear')}
-                  className="w-full h-12 rounded-xl bg-gray-800 hover:bg-gray-700 transition-colors font-medium text-sm text-gray-300"
+                  className="w-full h-11 rounded-xl bg-gray-800 hover:bg-gray-700 transition-colors font-medium text-sm text-gray-300"
                 >
                   Clear
                 </button>
               </div>
 
-              <div className="space-y-6">
+              <div className="space-y-5">
                 <div>
                   <Label htmlFor="expense-description" className="text-sm font-semibold text-gray-300 mb-3 block">
                     Description
@@ -227,7 +227,7 @@ const TransactionForm = ({ type, onClose, onSubmit }: TransactionFormProps) => {
                     value={description}
                     onChange={(e) => setDescription(e.target.value)}
                     placeholder="What did you spend on?"
-                    className="bg-gray-900 border-gray-700 text-white placeholder:text-gray-500 rounded-xl resize-none focus:border-blue-500 focus:ring-blue-500/20"
+                    className="bg-gray-900 border-gray-700 text-white placeholder:text-gray-500 rounded-xl resize-none focus:border-blue-500 focus:ring-blue-500/20 text-base"
                     rows={3}
                   />
                 </div>
@@ -241,7 +241,7 @@ const TransactionForm = ({ type, onClose, onSubmit }: TransactionFormProps) => {
                     value={category}
                     onChange={(e) => setCategory(e.target.value)}
                     placeholder="e.g., Food, Transport, Shopping"
-                    className="bg-gray-900 border-gray-700 text-white placeholder:text-gray-500 rounded-xl h-12 focus:border-blue-500 focus:ring-blue-500/20"
+                    className="bg-gray-900 border-gray-700 text-white placeholder:text-gray-500 rounded-xl h-12 focus:border-blue-500 focus:ring-blue-500/20 text-base"
                   />
                 </div>
 
@@ -251,7 +251,7 @@ const TransactionForm = ({ type, onClose, onSubmit }: TransactionFormProps) => {
                     <PopoverTrigger asChild>
                       <Button
                         variant="outline"
-                        className="w-full justify-start text-left font-normal bg-gray-900 border-gray-700 text-white hover:bg-gray-800 rounded-xl h-12"
+                        className="w-full justify-start text-left font-normal bg-gray-900 border-gray-700 text-white hover:bg-gray-800 rounded-xl h-12 text-base"
                       >
                         <Calendar className="mr-3 h-4 w-4" />
                         {date ? format(date, 'dd MMMM yyyy', { locale: id }) : 'Select date'}
@@ -277,11 +277,11 @@ const TransactionForm = ({ type, onClose, onSubmit }: TransactionFormProps) => {
             </>
           )}
 
-          {/* Submit Button */}
+          {/* Submit Button - Better proportions */}
           <div className="pt-6">
             <Button
               type="submit"
-              className={`w-full py-4 font-bold rounded-2xl text-white h-14 ${
+              className={`w-full py-4 font-bold rounded-2xl text-white h-13 text-base ${
                 type === 'income' 
                   ? 'bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-500 hover:to-emerald-500' 
                   : 'bg-gradient-to-r from-red-600 to-pink-600 hover:from-red-500 hover:to-pink-500'
